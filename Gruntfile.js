@@ -6,6 +6,15 @@ module.exports = function(grunt) {
     var scss = source + '_scss';
     var cssOutputDir = source + 'css';
 
+    grunt.registerTask('installassemble', 'install grunt-assemble', function() {
+        var exec = require('child_process').exec;
+        var cb = this.async();
+        exec('npm install', {cwd: './node_modules/grunt-assemble'}, function(err, stdout, stderr) {
+            console.log(stdout);
+            cb();
+        });
+    });
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         open : {
@@ -100,16 +109,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-sync');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-livereload');
     grunt.loadNpmTasks('grunt-git');
-    grunt.loadNpmTasks('assemble');
+    grunt.loadNpmTasks('grunt-assemble');
     grunt.loadNpmTasks('grunt-newer');
 
     grunt.registerTask('default', [
+    	"installassemble", //install broken assemble 
         'clean', // clean out any deleted files
         'assemble',  // build pages from scratch on startup
-        'compass',
         'sync',  // copy documentation to src, copy resources from src to output
         'open',
         'http-server',  // start server
@@ -117,8 +125,8 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('prod', [
+    	"installassemble", //install broken assemble 
         'clean', // clean out any deleted files
-        'compass', // build SCSS => CSS
         'sync',  // copy documentation to src, copy resources from src to output
         'assemble',  // build pages
     ]);

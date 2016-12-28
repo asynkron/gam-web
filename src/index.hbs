@@ -3,105 +3,97 @@ layout: master.hbs
 title: Welcome to GAM
 active_selector: home
 ---
+<section class="section section-quaternary  mt-none mb-none section-default-scale-8">
+	<div class="container text-center">
+		<h2><strong>Ultra-fast Cross-platform distributed actor framework.</strong></h2>
+		<p>GAM is a toolkit and runtime for building highly concurrent, distributed, and fault tolerant event-driven applications on <strong>.NET</strong> &amp; <strong>Go</strong>.</p>
+	</div>
+</section>
 
-			<section class="section section-quaternary  mt-none mb-none section-default-scale-8">
-			    <div class="container text-center">
-			        <h2>Ultra-fast Cross-platform distributed actor framework</strong>.</h2>
-			        <p>GAM is a toolkit and runtime for building highly concurrent, distributed, and fault tolerant event-driven applications on <strong>.NET</strong> &amp; <strong>Go</strong>.</p>
-			    </div>
-			</section>
+<section class="section section-primary  mt-none mb-none" >
+	<div class="container">
+		<div class="row">
 
-			<!-- WELCOME -->
-			<section class="section section-primary  mt-none mb-none" >
-				<div class="container">
-					<!-- FEATURED BOXES 3 -->
-					<div class="row">
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<h4><i class="fa fa-arrows-alt"></i> Simple Concurrency &amp; Distribution</h4>
+				<p>Asynchronous and Distributed by design. High-level abstractions like Actors and Virtual Grains.</p>
+			</div>
 
-						<div class="col-md-4 col-sm-6 col-xs-12">
-							<h4><i class="fa fa-arrows-alt"></i> Simple Concurrency &amp; Distribution</h4>
-							<p>Asynchronous and Distributed by design. High-level abstractions like Actors and Virtual Grains.</p>
-						</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<h4><i class="fa fa-flash"></i> Extreme Performance</h4>
+				<p>Capable of more than two million messages per second between processes</p>
+			</div>
 
-						<div class="col-md-4 col-sm-6 col-xs-12">
-							<h4><i class="fa fa-flash"></i> Extreme Performance</h4>
-							<p>Capable of more than two million messages per second between processes</p>
-						</div>
-
-						<div class="col-md-4 col-sm-6 col-xs-12">
-							<h4><i class="fa fa-shield"></i> Resilient by Design</h4>
-							<p>Write systems that self-heal using supervisor hierarchies.</p>
-						</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<h4><i class="fa fa-shield"></i> Resilient by Design</h4>
+				<p>Write systems that self-heal using supervisor hierarchies.</p>
+			</div>
 
 
-						<div class="col-md-4 col-sm-6 col-xs-12">
-							<h4><i class="fa fa-th-large"></i> Elastic & Decentralized</h4>
-							<p>Use Virtual Grains for friction free scalability</p>
-						</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<h4><i class="fa fa-th-large"></i> Elastic & Decentralized</h4>
+				<p>Use Virtual Grains for friction free scalability</p>
+			</div>
 
-						<div class="col-md-4 col-sm-6 col-xs-12">
-							<h4><i class="fa fa-plus-circle"></i> Built on standards</h4>
-							<p>GAM is built ontop of Googles gRPC and Protobuf, taking advantage of proven stability and performance.</p>
-						</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<h4><i class="fa fa-plus-circle"></i> Built on standards</h4>
+				<p>GAM is built ontop of Googles gRPC and Protobuf, taking advantage of proven stability and performance.</p>
+			</div>
 
-						<div class="col-md-4 col-sm-6 col-xs-12">
-							<h4><i class="fa fa-exclamation"></i> Open Source </h4>
-							<p>GAM is released under the Apache 2 license</p>
-						</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<h4><i class="fa fa-exclamation"></i> Open Source </h4>
+				<p>GAM is released under the Apache 2 license</p>
+			</div>
 
-					</div>
-					<!-- /FEATURED BOXES 3 -->
+		</div>
+	</div>
+</section>
+<section class="section section-default mt-none section-footer">
+	<div class="container">
 
-				</div>
-			</section>
-			<!-- /WELCOME -->
+		<div class="row">
+			<div class="col-md-6">
+				<h2><strong>Actor</strong> Model</h2>
+				<p class="lead">
+				The Actor Model provides a higher level of abstraction for writing concurrent and distributed systems. It alleviates the developer from having to deal with explicit locking and thread management, making it easier to write correct concurrent and parallel systems. </p>
+				<p>Actors were defined in the 1973 paper by <a href="http://en.wikipedia.org/wiki/Carl_Hewitt">Carl Hewitt</a> but have been popularized by the Erlang language, and used for example at Ericsson with great success to build highly concurrent and reliable telecom systems.</p>
+				<p><a href="/docs/Actors">Read more</a></p>
+			</div>
 
-			<!-- PREMIUM -->
-			<section class="section section-default mt-none section-footer">
-				<div class="container">
+			<div class="col-md-6 text-center">
 
-					<div class="row">
-						<div class="col-md-6">
-<h2><strong>Actor</strong> Model</h2>
-							<p class="lead">
-The Actor Model provides a higher level of abstraction for writing concurrent and distributed systems. It alleviates the developer from having to deal with explicit locking and thread management, making it easier to write correct concurrent and parallel systems. </p>
-							<p>Actors were defined in the 1973 paper by <a href="http://en.wikipedia.org/wiki/Carl_Hewitt">Carl Hewitt</a> but have been popularized by the Erlang language, and used for example at Ericsson with great success to build highly concurrent and reliable telecom systems.</p>
-							<p><a href="/docs/Actors">Read more</a></p>
-						</div>
+				<img class="" data-animation="fadeIn" style="border:2px solid white;width:100%;border-radius:10px" src="/images/actor.png" alt="" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<h2><strong>Distributed</strong> by Default</h2>
+				<p class="lead">
+				Everything in GAM is designed to work in a distributed setting: all interactions of actors use purely message passing and everything is asynchronous.
+				</p>
+				<p>This effort has been undertaken to ensure that all functions are available equally when running within a single process or on a cluster of hundreds of machines. The key for enabling this is to go from remote to local by way of optimization instead of trying to go from local to remote by way of generalization. See this classic paper for a detailed discussion on why the second approach is bound to fail.
+				</p>
+				<p><a href="/docs/Remoting">Read more</a></p>
+			</div>
 
-						<div class="col-md-6 text-center">
+			<div class="col-md-6 text-center">
+				<img class="" data-animation="fadeIn" style="border:2px solid white;width:100%;border-radius:10px" src="/images/network.png" alt="" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<h2><strong>Supervision</strong> &amp; monitoring</h2>
+				<p class="lead">
+				Actors form a tree with actors being parents to the actors they've created.</p>
+				<p>
+				As a parent, the actor is responsible for handling its children’s failures (so-called supervision), forming a chain of responsibility, all the way to the top. When an actor crashes, its parent can either restart or stop it, or escalate the failure up the hierarchy of actors.
+				This enables a clean set of semantics for managing failures in a concurrent, distributed system and allows for writing highly fault-tolerant systems that self-heal.</p>
+				<p><a href="/docs/Supervision">Read more</a></p>
+			</div>
 
-							<img class="" data-animation="fadeIn" style="border:2px solid white;width:100%;border-radius:10px" src="/images/actor.png" alt="" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-<h2><strong>Distributed</strong> by Default</h2>
-							<p class="lead">
-Everything in GAM is designed to work in a distributed setting: all interactions of actors use purely message passing and everything is asynchronous.
-</p>
-							<p>This effort has been undertaken to ensure that all functions are available equally when running within a single process or on a cluster of hundreds of machines. The key for enabling this is to go from remote to local by way of optimization instead of trying to go from local to remote by way of generalization. See this classic paper for a detailed discussion on why the second approach is bound to fail.
-							</p>
-							<p><a href="/docs/Remoting">Read more</a></p>
-						</div>
-
-						<div class="col-md-6 text-center">
-							<img class="" data-animation="fadeIn" style="border:2px solid white;width:100%;border-radius:10px" src="/images/network.png" alt="" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-<h2><strong>Supervision</strong> &amp; monitoring</h2>
-							<p class="lead">
-Actors form a tree with actors being parents to the actors they've created.</p>
-							<p>
-As a parent, the actor is responsible for handling its children’s failures (so-called supervision), forming a chain of responsibility, all the way to the top. When an actor crashes, its parent can either restart or stop it, or escalate the failure up the hierarchy of actors.
-This enables a clean set of semantics for managing failures in a concurrent, distributed system and allows for writing highly fault-tolerant systems that self-heal.</p>
-<p><a href="/docs/Supervision">Read more</a></p>
-						</div>
-
-						<div class="col-md-6 text-center">
-							<img class="" data-animation="fadeIn" style="border:2px solid white;width:100%;border-radius:10px" src="/images/supervision.png" alt="" />
-						</div>
-					</div>
-				</div>
-			</section>
+			<div class="col-md-6 text-center">
+				<img class="" data-animation="fadeIn" style="border:2px solid white;width:100%;border-radius:10px" src="/images/supervision.png" alt="" />
+			</div>
+		</div>
+	</div>
+</section>

@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 		'watch': {
 		  all: {
 		    files: 'src/**/*.*',
-		    tasks: ['compass', 'newer:assemble', 'sync'], // only build changed pages
+		    tasks: ['newer:assemble', 'sync'], // only build changed pages
 		    options: {
 		      livereload: true,
 		    },

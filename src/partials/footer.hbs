@@ -1,43 +1,74 @@
 <footer id="footer">
-  <div class="container">
-    <div class="row">
-        <!-- col #1 -->
-        <div class="spaced dark col-md-3">
-            <h4>About <strong>Akka.NET</strong></h4>
-            <p class="block">
-                Akka.NET is a port of the popular
-                <br/> Java/Scala framework <a href="http://akka.io">Akka</a> to .NET.
-                <br/>
-                <br/> This is a community driven port and
-                <br/> is not affiliated with <a href="http://typesafe.com">Typesafe</a> who
-                <br/> makes the original Java/Scala version.
-                <br/>
-            </p>
-            <!-- social -->
-            <p class="block">
-                <a href="mailto:{{site.email}}">{{site.email}}</a><br>
-                <a href="{{site.facebook_url}}" class="social fa fa-facebook"></a>
-                <a href="{{site.stack_overflow_url}}" class="social fa fa-stack-overflow"></a>
-                <a href="{{site.twitter_url}}" class="social fa fa-twitter"></a>
-            </p><!-- /social -->
-        </div>
-        <!-- /col #1 -->
-        <!-- col #3 -->
-        <div class="spaced col-md-6 col-sm-4">
-            <h4>Recent <strong>Tweets</strong></h4>
-            <ul class="list-unstyled fsize13" id="recent_tweets">
-            </ul>
-        </div>
-        <!-- /col #3 -->
-        <div class="spaced col-md-3 col-sm-4">
-            <h4>Keep <strong>Updated</strong></h4>
-            <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
-            {{> newsletter_sub_form}}
-        </div>
-    </div>
-  </div>
-  <hr />
-  <!-- <div class="copyright">
-    <div class="container text-center fsize12"></div>
-  </div> -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="newsletter">
+					<h4>Newsletter</h4>
+					<p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+
+					<div class="alert alert-success hidden" id="newsletterSuccess">
+						<strong>Success!</strong> You've been added to our email list.
+					</div>
+
+					<div class="alert alert-danger hidden" id="newsletterError"></div>
+
+					<form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST" novalidate="novalidate">
+						<div class="input-group">
+							<input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit">Go!</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<h4>Latest Tweets</h4>
+				<div id="tweet" class="twitter" data-plugin-tweets="" data-plugin-options="{&quot;username&quot;: &quot;&quot;, &quot;count&quot;: 2}">
+					<p>Please wait...</p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="contact-details">
+					<h4>Contact Us</h4>
+					<ul class="contact">
+						<li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, City Name, United States</p></li>
+						<li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-789</p></li>
+						<li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></p></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<h4>Follow Us</h4>
+				<ul class="social-icons">
+					<li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+					<li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+					<li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1">
+					<a href="index.html" class="logo">
+						<img alt="Porto Website Template" class="img-responsive" src="/img/logo-footer.png">
+					</a>
+				</div>
+				<div class="col-md-7">
+					<p>© Copyright 2016. All Rights Reserved.</p>
+				</div>
+				<div class="col-md-4">
+					<nav id="sub-menu">
+						<ul>
+							<li><a href="page-faq.html">FAQ's</a></li>
+							<li><a href="sitemap.html">Sitemap</a></li>
+							<li><a href="contact-us.html">Contact</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
 </footer>

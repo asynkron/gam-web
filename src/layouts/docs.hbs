@@ -28,13 +28,12 @@ active_selector: docs
 			<div class="col-md-3">
 				<aside class="sidebar">
 
-					<h4 class="heading-primary">Categories</h4>
-					<ul class="side-nav list-group toc-container">
-					</ul>
-
+					<h4 class="heading-primary">Topics</h4>
+					<div id="toc">
+					</div>
 				</aside>
 			</div>
-			<div class="col-md-9">
+			<div class="col-md-9" id="main_content">
 				{{#gfm }}
 				{{> body }}
 				{{/gfm }}

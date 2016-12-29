@@ -4,14 +4,15 @@ title: What is GAM
 ---
 # What is GAM?
 
-GAM is a next generation Actor Model framework.
+GAM is a **Next generation Actor Model framework**.
+
 Over the last few years we have seen two competing aproaches of actors emerging.
 First we have the classical Erlang/Akka style actors, and later came the Microsoft Orleans style *"virtual actors"* or *"Grains"*.
 These two ways both yield different benefits and drawbacks.
 
 GAM unifies both of these two ways of working under a common framework.
 
-GAM also solves another issue, none of the pre-existing actor model frameworks or languages can communicate between platforms.
+GAM solves another major issue, none of the pre-existing actor model frameworks or languages can communicate between platforms.
 Picking one of the old ways of working with actors, you are locked into a specific platfor.
 
 This is why GAM introduces "Actor Standard Protocol", a predefined contract of base primitives which can be consumed by different language implementations.

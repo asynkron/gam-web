@@ -2,9 +2,9 @@
 layout: docs.hbs
 title: Getting started
 ---
-# Getting started with Akka.NET
+# Getting started with GAM
 
-This tutorial is intended to give an introduction to using Akka.NET by creating a simple greeter actor using C#.
+This tutorial is intended to give an introduction to using GAM by creating a simple greeter actor using C#.
 
 ## Set up your project
 
@@ -12,7 +12,7 @@ Start visual studio and create a new C# Console Application.
 Once we have our console application, we need to open up the Package Manager Console and type:
 
 ```PM
-PM> Install-Package Akka
+PM> Install-Package GAM
 ```
 
 Then we need to add the relevant using statements:
@@ -25,8 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 //Add these two lines
-using Akka;
-using Akka.Actor;
+using GAM;
 
 namespace ConsoleApplication11
 {
@@ -50,8 +49,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Akka;
-using Akka.Actor;
+using GAM;
 
 namespace ConsoleApplication11
 {
@@ -75,6 +73,7 @@ namespace ConsoleApplication11
 ```
 
 Once we have the message type, we can create our actor:
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -82,8 +81,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Akka;
-using Akka.Actor;
+using GAM;
 
 namespace ConsoleApplication11
 {
@@ -97,14 +95,17 @@ namespace ConsoleApplication11
     }
 
     // Create the actor class
-    public class GreetingActor : ReceiveActor
+    public class GreetingActor : IActor
     {
-        public GreetingActor()
+        public Task ReceiveAsync(IContext ctx)
         {
-            // Tell the actor to respond
-            // to the Greet message
-            Receive<Greet>(greet =>
-               Console.WriteLine("Hello {0}", greet.Who));
+            if (ctx.Message is Greet)
+            {
+                // Tell the actor to respond
+                // to the Greet message
+                var greet = (Greet)ctx.Message;
+                Console.WriteLine("Hello {0}", greet.Who)); 
+            }
         }
     }
 
@@ -117,7 +118,7 @@ namespace ConsoleApplication11
 }
 ```
 
-Now it's time to consume our actor, we do so by creating an `ActorSystem` and calling `ActorOf`
+Now it's time to consume our actor, we do so by calling `Spawn`
 
 ```csharp
 using System;
@@ -126,8 +127,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Akka;
-using Akka.Actor;
+using GAM;
 
 namespace ConsoleApplication11
 {
@@ -140,12 +140,18 @@ namespace ConsoleApplication11
         public string Who { get;private set; }
     }
 
-    public class GreetingActor : ReceiveActor
+    // Create the actor class
+    public class GreetingActor : IActor
     {
-        public GreetingActor()
+        public Task ReceiveAsync(IContext ctx)
         {
-            Receive<Greet>(greet =>
-               Console.WriteLine("Hello {0}", greet.Who));
+            if (ctx.Message is Greet)
+            {
+                // Tell the actor to respond
+                // to the Greet message
+                var greet = (Greet)ctx.Message;
+                Console.WriteLine("Hello {0}", greet.Who)); 
+            }
         }
     }
 
@@ -153,14 +159,8 @@ namespace ConsoleApplication11
     {
         static void Main(string[] args)
         {
-            // Create a new actor system (a container for your actors)
-            var system = ActorSystem.Create("MySystem");
-
-            // Create your actor and get a reference to it.
-            // This will be an "ActorRef", which is not a
-            // reference to the actual actor instance
-            // but rather a client or proxy to it.
-            var greeter = system.ActorOf<GreetingActor>("greeter");
+            var props = Actor.FromProducer(() => new GreetingActor());
+            var greeter = Actor.Spawn(props);
 
             // Send a message to the actor
             greeter.Tell(new Greet("World"));

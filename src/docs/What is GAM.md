@@ -11,11 +11,33 @@ These two ways both yield different benefits and drawbacks.
 
 GAM unifies both of these two ways of working under a common framework.
 
-GAM also solves another issue, none of the pre existing actor model frameworks or languages can cmmunicate between platforms.
+GAM also solves another issue, none of the pre-existing actor model frameworks or languages can communicate between platforms.
 Picking one of the old ways of working with actors, you are locked into a specific platfor.
 
 This is why GAM introduces "Actor Standard Protocol", a predefined contract of base primitives which can be consumed by different language implementations.
 This is a game changer in the field of actor systems, you are now free to pick and chose languages for your different actor based microservices in a way never seen before.
+
+## Relation to Microsoft Orleans
+
+GAM is based on the same distributed hash table and automatic placement strategies as Microsoft Orleans.
+The cluster Grains are also similar in the sense that they use an RPC based interface.
+
+## Relation To Akka and Akka.NET
+
+The core parts of GAM loosely follows the conceptual API of Akka.
+
+GAM was created by Roger Johansson, the original creator of Akka.NET.
+The reason for creating yet another actor model framework was due to the many design issues faced while building Akka.NET.
+Akka.NET required the team to build custom thread pools, custom network layers, custom serialization, custom configuration support and much more.
+All interesting topics on their own, but yield a huge cost in terms of development and maintenance hours.
+
+GAM focuses on only solving the actual problems at hand, concurrency and distributed programming by reusing existing proven building blocks for all the
+secondary aspects.
+
+GAM uses Protobuf for serialization, a decision that vastly simplifies the way GAM works.
+Message based systems should be about passing information, not passing complex OOP object graphs or code.
+
+GAM also uses gRPC, leveraging HTTP/2 setreams for network communication.
 
 ## Scalable, distributed real-time transaction processing
 
@@ -32,12 +54,14 @@ GAM is Open Source and available under the [Apache 2 License](http://www.apache.
 Download from https://github.com/AsynkronIT/gam.
 
 ## A unique hybrid
-### Actors
-Actors give you:
 
+### Actors
 * Simple and high-level abstractions for concurrency and parallelism.
 * Asynchronous, non-blocking and highly performant event-driven programming model.
 * Very lightweight event-driven processes (several million actors per GB of heap memory).
+
+## Virtual Actors
+* Easy to use RPC based abstraction form friction-free distributed programming.
 
 ### Fault Tolerance
 * Supervisor hierarchies with "let it crash" semantics.

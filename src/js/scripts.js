@@ -3,7 +3,7 @@ $(function() {
 		'listType': '<ul class="nav nav-list mb-xlg" />',
 		'selectors': 'h1,h2,h3', //elements to use as headings
 		'container': '#main_content', //element to find all selectors in
-		'offset': 0,
+		'scrollToOffset': 200,
 		'headerText': function(i, heading, $heading) { //custom function building the header-item text
 		return $heading.text();
 	    },

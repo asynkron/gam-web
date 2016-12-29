@@ -28,18 +28,6 @@ public class GreetingActor : ReceiveActor
         Receive<Greet>(greet => Console.WriteLine("Hello {0}", greet.Who));
     }
 }
-```
-
-#### ..or using the `TypedActor` API
-```csharp
-public class GreetingActor : TypedActor , IHandle<Greet>
-{
-    public void Handle(Greet greet)
-    {
-        Console.WriteLine("Hello {0}!", greet.Who);
-    }
-}
-```
 
 
 #### Usage:

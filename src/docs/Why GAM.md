@@ -1,13 +1,13 @@
 ---
 layout: docs.hbs
-title: Why Akka
+title: Why GAM
 ---
-# Why Akka?
+# Why GAM?
 
-## What features can the Akka.NET platform offer over the competition?
-Akka.NET provides scalable, real-time transaction processing.
+## What features can the GAM platform offer over the competition?
+GAM provides scalable, real-time transaction processing.
 
-Akka.NET is a unified runtime and programming model for:
+GAM is a unified runtime and programming model for:
 
 * Scale up (Concurrency)
 * Scale out (Remoting)
@@ -15,12 +15,12 @@ Akka.NET is a unified runtime and programming model for:
 
 With one thing to learn and admin, with high cohesion and coherent semantics.
 
-Akka.NET is a very scalable piece of software; not only in the context of performance, but also in the size of applications it is useful for. The core of Akka.NET, Akka.NET-actor, is very small and it can easily be dropped into an existing project where you need asynchronicity and lockless concurrency without hassle.
+GAM is a very scalable piece of software; not only in the context of performance, but also in the size of applications it is useful for. The core of GAM, GAM-Actor, is very small and it can easily be dropped into an existing project where you need asynchronicity and lockless concurrency without hassle.
 
-You can choose to include only the parts of Akka.NET you need in your application and then there's the whole package, the Akka.NET Microkernel - a standalone container in which to deploy your Akka.NET application. With the number of CPU cores increasing every cycle, Akka.NET is the alternative that provides outstanding performance, even if you're only running it on one machine. Akka.NET also supplies a wide array of concurrency paradigms, allowing users to choose the right tool for the job.
+You can choose to include only the parts of GAM you need in your application or you can use the whole package with persistence and clustering.
 
-## What's a good use case for Akka.NET?
-We see Akka.NET being adopted by many large organizations in a wide range of industries:
+## What's a good use case for GAM?
+We see GAM being adopted by many large organizations in a wide range of industries:
 
 * Investment and Merchant Banking
 * Retail
@@ -30,10 +30,9 @@ We see Akka.NET being adopted by many large organizations in a wide range of ind
 * Automobile and Traffic Systems
 * Health Care
 * Data Analytics
-and many more. Any system with the need for high throughput and low latency is a good candidate for using Akka.NET.
+
+and many more. Any system with the need for high throughput and low latency is a good candidate for using GAM.
 
 Actors let you manage service failures (Supervisors), load management (back-off strategies, timeouts and processing-isolation), as well as both horizontal and vertical scalability (add more cores and/or add more machines).
-
-Here's what some of the Akka users have to say about how they are using Akka: http://stackoverflow.com/questions/4493001/good-use-case-for-akka
 
 All this in the ApacheV2-licensed open source project.

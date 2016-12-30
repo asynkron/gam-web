@@ -5,7 +5,7 @@ title: What is ProtoAct
 # What is ProtoAct?
 ProtoAct is a **Next generation Actor Model framework**.
 
-Over the last few years we have seen two competing aproaches of actors emerging.
+Over the last few years we have seen two competing approaches of actors emerging.
 First we have the classical Erlang/Akka style actors, and later came the Microsoft Orleans style *"virtual actors"* or *"Grains"*.
 These two ways both yield different benefits and drawbacks.
 

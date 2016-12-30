@@ -18,8 +18,12 @@ This is why GAM introduces "Actor Standard Protocol", a predefined contract of b
 This is a game changer in the field of actor systems, **you are now free to pick and choose languages for your different actor based microservices in a way never seen before.**
 
 ## Relation to Microsoft Orleans
-GAM is based on the same distributed hash table and automatic placement strategies as Microsoft Orleans.
+GAM is based on the same conceptual distributed hash table and automatic placement strategies as Microsoft Orleans.
 The cluster Grains are also similar in the sense that they use an RPC based interface.
+The virtual actor model have proven to be very successful and is here to stay.
+We are fully embracing this concept.
+
+Read more [VirtualActors](VirtualActors)
 
 ## Relation To Akka and Akka.NET
 The core parts of GAM loosely follows the conceptual API of Akka.

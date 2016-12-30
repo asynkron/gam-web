@@ -3,8 +3,8 @@ layout: docs.hbs
 title: ProtoAct Documentation
 ---
 
-## ProtoAct Framework
-### Introduction
+# ProtoAct Framework
+## Introduction
 - [What is ProtoAct?](What is ProtoAct)
 - [Why ProtoAct?](Why ProtoAct)
 - [The Obligatory Hello World](The Obligatory Hello World)
@@ -20,7 +20,7 @@ title: ProtoAct Documentation
 - [Location Transparency](concepts/location-transparency)
 - [Message Delivery Reliability](concepts/message-delivery-reliability)
 
-### Working with Actors
+## Working with Actors
 - [Creating actors](working-with-actors/creating-actors)
 - [Actor API](working-with-actors/actor-lifecycle)
 - [Identifying Actors via Actor Selection](working-with-actors/identifying-actors-via-actor-selection)
@@ -32,7 +32,7 @@ title: ProtoAct Documentation
 - [Stashing Messages](working-with-actors/Stashing Messages)
 - [Initialization patterns](working-with-actors/initialization-patterns)
 
-### Actors
+## Actors
 - [Working with actors](Working with actors)
 - [Persistence](Persistence)
 - [Fault Tolerance](Fault tolerance)
@@ -40,6 +40,6 @@ title: ProtoAct Documentation
 - [Mailboxes](working-with-actors/Mailbox)
 - [Routers](working-with-actors/Routers)
 
-### Additional Information
+## Additional Information
 - [Books](Books)
 

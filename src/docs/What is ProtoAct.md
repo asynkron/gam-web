@@ -62,7 +62,7 @@ Download from https://github.com/AsynkronIT/ProtoAct.
 * Very lightweight event-driven processes (several million actors per GB of heap memory).
 
 ## Virtual Actors
-* Easy to use RPC based abstraction form friction-free distributed programming.
+* Easy to use RPC based abstraction for friction-free distributed programming.
 
 ### Fault Tolerance
 * Supervisor hierarchies with "let it crash" semantics.

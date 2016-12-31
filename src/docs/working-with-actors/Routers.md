@@ -9,7 +9,7 @@ A *router* is a special type of actor whose job is to route messages to other ac
 
 Routers can be used inside or outside of an actor, and you can manage the routees yourself or use a self contained router actor with configuration capabilities, and can also [resize dynamically](#dynamically-resizable-pools) under load.
 
-Akka.NET comes with several useful routers you can choose right out of the box, according to your application's needs. But it is also possible to create your own.
+ProtoAct comes with several useful routers you can choose right out of the box, according to your application's needs. But it is also possible to create your own.
 
 > **Note:**<br/>
 > In general, any message sent to a router will be forwarded to one of its routees, but there is one exception.
@@ -34,42 +34,6 @@ The above code can also be written as:
 ```cs
 var props = new RoundRobinPool(5).Props(Props.Create<Worker>());
 ```
-
-#### Configuration deployment
-
-The same router may be defined using a [HOCON deployment configuration](../concepts/Configuration).
-
-In order to do that, define a HOCON section with the path of the actor, and create the actor in that path using `FromConfig.Instance`.
-
-```hocon
-akka.actor.deployment {
-  /workers {
-    router = round-robin-pool
-    nr-of-instances = 5
-  }
-}
-```
-```cs
-var props = Props.Create<Worker>().WithRouter(FromConfig.Instance);
-var actor = system.ActorOf(props, "workers");
-```
-
-For router groups, the same idea applies with slightly different syntax:
-
-```hocon
-akka.actor.deployment {
-  /workers {
-    router = round-robin-group
-    routees.paths = ["/user/workers/w1", "/user/workers/w2", "/user/workers/w3"]
-  }
-}
-```
-```cs
-var props = Props.Create<Worker>().WithRouter(FromConfig.Instance);
-var actor = system.ActorOf(props, "workers");
-```
-
-As you can see above, the advantage of using HOCON for routers is that you can change the deployment of routers easily without recompiling the code.
 
 ## Pools vs. Groups
 
@@ -98,7 +62,7 @@ By default, pool routers use a custom strategy that only returns `Escalate` for 
 
 ## Routing Strategies
 
-These are the routing strategies provided by Akka.NET out of the box.
+These are the routing strategies provided by ProtoAct out of the box.
 
 ### RoundRobin
 
@@ -108,38 +72,10 @@ These are the routing strategies provided by Akka.NET out of the box.
 
 #### Usage:
 
-RoundRobinPool defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-pool {
-    router = round-robin-pool
-    nr-of-instances = 5
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Create<Worker>().WithRouter(FromConfig.Instance), "some-pool");
-```
-
 RoundRobinPool defined in code:
 
 ```cs
 var router = system.ActorOf(Props.Create<Worker>().WithRouter(new RoundRobinPool(5)), "some-pool");
-```
-
-RoundRobinGroup defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-group {
-    router = round-robin-group
-    routees.paths = ["/user/workers/w1", "/user/workers/w2", "/user/workers/w3"]
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "some-group");
 ```
 
 RoundRobinGroup defined in code:
@@ -157,38 +93,10 @@ The `BroadcastPool` and `BroadcastGroup` routers will, as the name implies, broa
 
 #### Usage:
 
-BroadcastPool defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-pool {
-    router = broadcast-pool
-    nr-of-instances = 5
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Create<Worker>().WithRouter(FromConfig.Instance), "some-pool");
-```
-
 BroadcastPool defined in code:
 
 ```cs
 var router = system.ActorOf(Props.Create<Worker>().WithRouter(new BroadcastPool(5)), "some-pool");
-```
-
-BroadcastGroup defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-group {
-    router = broadcast-group
-    routees.paths = ["/user/a1", "/user/a2", "/user/a3"]
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "some-group");
 ```
 
 BroadcastGroup defined in code:
@@ -204,38 +112,10 @@ The `RandomPool` and `RandomGroup` routers will forward messages to routees in r
 
 #### Usage:
 
-RandomPool defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-pool {
-    router = random-pool
-    nr-of-instances = 5
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Create<Worker>().WithRouter(FromConfig.Instance), "some-pool");
-```
-
 RandomPool defined in code:
 
 ```cs
 var router = system.ActorOf(Props.Create<Worker>().WithRouter(new RandomPool(5)), "some-pool");
-```
-
-RandomGroup defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-group {
-    router = random-group
-    routees.paths = ["/user/workers/w1", "/user/workers/w2", "/user/workers/w3"]
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "some-group");
 ```
 
 RandomGroup defined in code:
@@ -296,44 +176,14 @@ There are 3 ways to define what data to use for the consistent hash key.
   var msg = new ConsistentHashableEnvelope(originalMsg, originalMsg.GroupID);
 ```
 
-You may implement more than one hashing mechanism at the same time. Akka.NET will try them in the order above. That is, if the HashMapping method returns null, Akka.NET will check for the IConsistentHashable interface in the message (2 and 3 are technically the same).
+You may implement more than one hashing mechanism at the same time. ProtoAct will try them in the order above. That is, if the HashMapping method returns null, ProtoAct will check for the IConsistentHashable interface in the message (2 and 3 are technically the same).
 
 #### Usage:
-
-ConsistentHashingPool defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-pool {
-    router = consistent-hashing-pool
-    nr-of-instances = 5
-    virtual-nodes-factor = 10
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Create<Worker>().WithRouter(FromConfig.Instance), "some-pool");
-```
 
 ConsistentHashingPool defined in code:
 
 ```cs
 var router = system.ActorOf(Props.Create<Worker>().WithRouter(new ConsistentHashingPool(5)), "some-pool");
-```
-
-ConsistentHashingGroup defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-group {
-    router = consistent-hashing-group
-    routees.paths = ["/user/workers/w1", "/user/workers/w2", "/user/workers/w3"]
-    virtual-nodes-factor = 10
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "some-group");
 ```
 
 ConsistentHashingGroup defined in code:
@@ -342,131 +192,6 @@ ConsistentHashingGroup defined in code:
 var workers = new [] { "/user/workers/w1", "/user/workers/w3", "/user/workers/w3" }
 var router = system.ActorOf(Props.Empty.WithRouter(new ConsistentHashingGroup(workers)), "some-group");
 ```
-
-> **Notes:**<br>
-> 1. `virtual-nodes-factor` is the number of virtual nodes per routee that is used in the consistent hash node ring - if not defined, the default value is 10 and you shouldn't need to change it unless you understand how the algorithm works and know what you are doing.
-> 2. It is possible to define this value in code using the `WithVirtualFactor(...)` method of the ConsistentHashingPool/Group object.
-
-### TailChopping
-
-The `TailChoppingPool` and `TailChoppingGroup` routers send the message to a random routee, and if no response is received after a specified delay, send it to another randomly selected routee. It waits for the first reply from any of the routees, and forwards it back to the original sender. Other replies are discarded. If no reply is received after a specified interval, a timeout Failure is generated.
-
-The goal of this router is to decrease latency by performing redundant queries to multiple routees, assuming that one of the other actors may still be faster to respond than the initial one.
-
-This optimization was described nicely in a blog post by Peter Bailis: [Doing redundant work to speed up distributed queries](http://www.bailis.org/blog/doing-redundant-work-to-speed-up-distributed-queries/).
-
-#### Usage:
-
-TailChoppingPool defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-pool {
-    router = tail-chopping-pool
-    nr-of-instances = 5
-    within = 10s
-    tail-chopping-router.interval = 20ms
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Create<Worker>().WithRouter(FromConfig.Instance), "some-pool");
-```
-
-TailChoppingPool defined in code:
-
-```cs
-var within = TimeSpan.FromSeconds(10);
-var interval = TimeSpan.FromMilliseconds(20);
-var router = system.ActorOf(Props.Create<Worker>().WithRouter(new TailChoppingPool(5, within, interval)), "some-pool");
-```
-
-TailChoppingGroup defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-group {
-    router = tail-chopping-group
-    routees.paths = ["/user/workers/w1", "/user/workers/w2", "/user/workers/w3"]
-    within = 10s
-    tail-chopping-router.interval = 20ms
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "some-group");
-```
-
-TailChoppingGroup defined in code:
-
-```cs
-var workers = new [] { "/user/workers/w1", "/user/workers/w3", "/user/workers/w3" }
-var within = TimeSpan.FromSeconds(10);
-var interval = TimeSpan.FromMilliseconds(20);
-var router = system.ActorOf(Props.Empty.WithRouter(new TailChoppingGroup(workers, within, interval)), "some-group");
-```
-
-> **Notes:**<br />
-> 1. `within` is the time to wait for a reply from any routee before timing out
-> 2. `tail-chopping-router.interval` is the interval between requests to the other routees
-
-### ScatterGatherFirstCompleted
-
-The `ScatterGatherFirstCompletedPool` and `ScatterGatherFirstCompletedRouter` routers will broadcast the message to all routees and reply back to the original sender with the first reply it receives. All other replies are discarded. If no reply is received after a specified interval, a timeout Failure is generated.
-
-This is useful in scenarios where you can accept any reply to a query and doesn't care who answers (eg. you may query multiple servers in a cluster just to know if any of them is online - if one answers, you may not care about the others).
-
-![ScatterGatherFirstCompleted Router](../images/ScatterGatherFirstCompletedRouter.png)
-
-#### Usage:
-
-ScatterGatherFirstCompletedPool defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-pool {
-    router = scatter-gather-pool
-    nr-of-instances = 5
-    within = 10s
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Create<Worker>().WithRouter(FromConfig.Instance), "some-pool");
-```
-
-ScatterGatherFirstCompletedPool defined in code:
-
-```cs
-var within = TimeSpan.FromSeconds(10);
-var router = system.ActorOf(Props.Create<Worker>().WithRouter(new ScatterGatherFirstCompletedPool(5, within)), "some-pool");
-```
-
-ScatterGatherFirstCompletedPool defined in configuration:
-
-```hocon
-akka.actor.deployment {
-  /some-group {
-    router = scatter-gather-group
-    routees.paths = ["/user/workers/w1", "/user/workers/w2", "/user/workers/w3"]
-    within = 10s
-  }
-}
-```
-```cs
-var router = system.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "some-group");
-```
-
-ScatterGatherFirstCompletedGroup defined in code:
-
-```cs
-var workers = new [] { "/user/workers/w1", "/user/workers/w3", "/user/workers/w3" }
-var within = TimeSpan.FromSeconds(10);
-var router = system.ActorOf(Props.Empty.WithRouter(new ScatterGatherFirstCompletedGroup(workers, within)), "some-group");
-```
-
-> **Notes:**<br />
-> 1. `within` is the time to wait for a reply from any routee before timing out
 
 ### SmallestMailbox
 
@@ -484,7 +209,7 @@ The `SmallestMailboxPool` router will send the message to the routee with fewest
 SmallestMailboxPool defined in configuration:
 
 ```hocon
-akka.actor.deployment {
+ProtoAct.actor.deployment {
   /some-pool {
     router = smallest-mailbox-pool
     nr-of-instances = 5
@@ -505,22 +230,7 @@ var router = system.ActorOf(Props.Create<Worker>().WithRouter(new SmallestMailbo
 
 Routers pools can be dynamically resized to adjust the responsiveness of the system under load.
 
-This is done by adding a `resizer` section to your router configuration:
-
-```hocon
-akka.actor.deployment {
-    /my-router {
-        router = round-robin-pool
-        resizer {
-            enabled = on
-            lower-bound = 1
-            upper-bound = 10
-        }
-    }
-}
-```
-
-You can also set a resizer in code when creating a router.
+You can set a resizer in code when creating a router.
 
 ```cs
 new RoundRobinPool(5, new DefaultResizer(1, 10))
@@ -571,44 +281,9 @@ router.Tell(new Broadcast("Hello, workers"));
 
 In this example, the router received the `Broadcast` message, extracted its payload (`Hello, workers`), and then dispatched it to all its routees. It is up to each routee actor to handle the payload.
 
-### PoisonPill Messages
-When an actor received `PoisonPill` message, that actor will be stopped. (see [PoisonPill](stopping-actors#graceful-shutdown-sending-an-actor-a-poisonpill) for details).
-
-For a router, which normally passes on messages to routees, the `PoisonPill` messages are processed __by the router only__. `PoisonPill` messages sent to a router will __not__ be sent on to its routees.
-
-However, a `PisonPill` message sent to a router may still affect its routees, as it will stop the router whhich in turns stop children the router has created. Each child will process its current message and then stop. This could lead to some messages being unprocessed.
-
-If you wish to stop a router and its routees, but you would like the routees to first process all the messages in their mailbxes, then you should send a `PoisonPill` message wrapped inside a `Broadcast` message so that each routee will receive the `PoisonPill` message. 
-
-> **Note:**<br/>
-> The above method will stop all routees, even if they are not created by the router. E.g. routees programatically provided to the router.
-
-```cs
-actorSystem.ActorOf(Props.Create<Worker>(), "worker1");
-actorSystem.ActorOf(Props.Create<Worker>(), "worker2");
-actorSystem.ActorOf(Props.Create<Worker>(), "worker3");
-
-var workers = new[] { "/user/worker1", "/user/worker2", "/user/worker3" };
-var router = actorSystem.ActorOf(Props.Empty.WithRouter(new RoundRobinGroup(workers)), "workers");
-
-router.Tell("Hello, worker1");
-router.Tell("Hello, worker2");
-router.Tell("Hello, worker3");
-
-// this sends PoisonPill message to all routees
-router.Tell(new Broadcast(PoisonPill.Instance));
-```
-
-With the code shown above, each routee will receive a `PoisonPill` message. Each routee will continue to process its messages as normal, eventually processing the `PoisonPill`. This will cause the routee to stop. After all routees have stopped the router will itself be stopped automatically unless it is a dynamic router, e.g. using a resizer.
-
-### Kill Message
-As with the `PoisonPill` messasge, there is a distinction between killing a router, which indirectly kills its children (who happen to be routees), and killing routees directly (some of whom may not be children.) To kill routees directly the router should be sent a Kill message wrapped in a `Broadcast` message.
-
-See [Noisy on Purpose: Kill the Actor](stopping-actors#noisy-on-purpose-kill-the-actor) for more details on how `Kill` message works.
-
 ## Advanced
 
-### How Routing is Designed within Akka.NET
+### How Routing is Designed within ProtoAct
 
 On the surface routers look like normal actors, but they are actually implemented differently. Routers are designed to be extremely efficient at receiving messages and passing them quickly on to routees.
 

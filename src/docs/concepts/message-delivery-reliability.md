@@ -5,7 +5,7 @@ title: Message Delivery Reliability
 
 # Message Delivery Reliability
 
-Akka.NET helps you build reliable applications which make use of multiple processor
+ProtoAct helps you build reliable applications which make use of multiple processor
 cores in one machine (“scaling up”) or distributed across a computer network
 (“scaling out”). The key abstraction to make this work is that all interactions
 between your code units—actors—happen via message passing, which is why the
@@ -37,17 +37,16 @@ role of the “Dead Letter Office”.
 
 ##The General Rules
 
-These are the rules for message sends (i.e. the ``tell`` or ``!`` method, which
-also underlies the ``ask`` pattern):
+These are the rules for message sends (i.e. the `Tell`  method, which
+also underlies the `Request` pattern):
 
 * **at-most-once delivery**, i.e. no guaranteed delivery
 * **message ordering per sender–receiver pair**
 
 The first rule is typically found also in other actor implementations while the
-second is specific to Akka.
+second is specific to ProtoAct.
 
-Discussion: What does “at-most-once” mean?
-------------------------------------------
+## Discussion: What does “at-most-once” mean?
 
 When it comes to describing the semantics of a delivery mechanism, there are
 three basic categories:
@@ -74,8 +73,7 @@ most expensive—and has consequently worst performance—because in addition to
 the second it requires state to be kept at the receiving end in order to filter
 out duplicate deliveries.
 
-Discussion: Why No Guaranteed Delivery?
----------------------------------------
+## Discussion: Why No Guaranteed Delivery?
 
 At the core of the problem lies the question what exactly this guarantee shall
 mean:
@@ -95,15 +93,15 @@ decide upon the “successfully” part of point five.
 Along those same lines goes the reasoning in `Nobody Needs Reliable
 Messaging`_. The only meaningful way for a sender to know whether an
 interaction was successful is by receiving a business-level acknowledgement
-message, which is not something Akka.NET could make up on its own (neither are we
+message, which is not something ProtoAct could make up on its own (neither are we
 writing a “do what I mean” framework nor would you want us to).
 
-Akka.NET embraces distributed computing and makes the fallibility of communication
+ProtoAct embraces distributed computing and makes the fallibility of communication
 explicit through message passing, therefore it does not try to lie and emulate
 a leaky abstraction. This is a model that has been used with great success in
 Erlang and requires the users to design their applications around it. You can
 read more about this approach in the `Erlang documentation`_ (section 10.9 and
-10.10), Akka.NET follows it closely.
+10.10), ProtoAct follows it closely.
 
 Another angle on this issue is that by providing only basic guarantees those
 use cases which do not need stronger reliability do not pay the cost of their
@@ -111,23 +109,23 @@ implementation; it is always possible to add stronger reliability on top of
 basic ones, but it is not possible to retro-actively remove reliability in order
 to gain more performance.
 
-##Discussion: Message Ordering
+## Discussion: Message Ordering
 
 The rule more specifically is that *for a given pair of actors, messages sent
 from the first to the second will not be received out-of-order.* This is
 illustrated in the following:
 
-  Actor ``A1`` sends messages ``M1``, ``M2``, ``M3`` to ``A2``
+  Actor `A1` sends messages `M1`, `M2`, `M3` to `A2`
 
-  Actor ``A3`` sends messages ``M4``, ``M5``, ``M6`` to ``A2``
+  Actor `A3` sends messages `M4`, `M5`, `M6` to `A2`
 
   This means that:
-      1) If ``M1`` is delivered it must be delivered before ``M2`` and ``M3``
-      2) If ``M2`` is delivered it must be delivered before ``M3``
-      3) If ``M4`` is delivered it must be delivered before ``M5`` and ``M6``
-      4) If ``M5`` is delivered it must be delivered before ``M6``
-      5) ``A2`` can see messages from ``A1`` interleaved with messages from ``A3``
-      6) Since there is no guaranteed delivery, any of the messages may be dropped, i.e. not arrive at ``A2``
+      1) If `M1` is delivered it must be delivered before `M2` and `M3`
+      2) If `M2` is delivered it must be delivered before `M3`
+      3) If `M4` is delivered it must be delivered before `M5` and `M6`
+      4) If `M5` is delivered it must be delivered before `M6`
+      5) `A2` can see messages from `A1` interleaved with messages from `A3`
+      6) Since there is no guaranteed delivery, any of the messages may be dropped, i.e. not arrive at `A2`
 
 >**Note**<br/>
 It is important to note that Akka's guarantee applies to the order in which
@@ -138,18 +136,18 @@ order.
 
 Please note that this rule is **not transitive**:
 
-  Actor ``A`` sends message ``M1`` to actor ``C``
+  Actor `A` sends message `M1` to actor `C`
 
-  Actor ``A`` then sends message ``M2`` to actor ``B``
+  Actor `A` then sends message `M2` to actor `B`
 
-  Actor ``B`` forwards message ``M2`` to actor ``C``
+  Actor `B` forwards message `M2` to actor `C`
 
-  Actor ``C`` may receive ``M1`` and ``M2`` in any order
+  Actor `C` may receive `M1` and `M2` in any order
 
-Causal transitive ordering would imply that ``M2`` is never received before
-``M1`` at actor ``C`` (though any of them might be lost). This ordering can be
-violated due to different message delivery latencies when ``A``, ``B`` and
-``C`` reside on different network hosts, see more below.
+Causal transitive ordering would imply that `M2` is never received before
+`M1` at actor `C` (though any of them might be lost). This ordering can be
+violated due to different message delivery latencies when `A`, `B` and
+`C` reside on different network hosts, see more below.
 
 >**Note**<br/>
 Actor creation is treated as a message sent from the parent to the child,
@@ -161,22 +159,22 @@ actor R1, send its reference to another remote actor R2 and have R2 send a
 message to R1. An example of well-defined ordering is a parent which creates
 an actor and immediately sends a message to it.
 
-###Communication of failure
+### Communication of failure
 
 Please note, that the ordering guarantees discussed above only hold for user messages between actors. Failure of a child
 of an actor is communicated by special system messages that are not ordered relative to ordinary user messages. In
 particular:
 
-  Child actor ``C`` sends message ``M`` to its parent ``P``
+  Child actor `C` sends message `M` to its parent `P`
 
-  Child actor fails with failure ``F``
+  Child actor fails with failure `F`
 
-  Parent actor ``P`` might receive the two events either in order ``M``, ``F`` or ``F``, ``M``
+  Parent actor `P` might receive the two events either in order `M`, `F` or `F`, `M`
 
 The reason for this is that internal system messages has their own mailboxes therefore the ordering of enqueue calls of
 a user and system message cannot guarantee the ordering of their dequeue times.
 
-##The Rules for In-App (Local) Message Sends
+## The Rules for In-App (Local) Message Sends
 
 ### Be careful what you do with this section!
 
@@ -189,9 +187,9 @@ this you should only rely on The [General Rules]().
 
 ###Reliability of Local Message Sends
 
-The Akka.NET test suite relies on not losing messages in the local context (and for
+The ProtoAct test suite relies on not losing messages in the local context (and for
 non-error condition tests also for remote deployment), meaning that we
-actually do apply the best effort to keep our tests stable. A local ``tell``
+actually do apply the best effort to keep our tests stable. A local `Tell`
 operation can however fail for the same reasons as a normal method call can on
 the CLR:
 
@@ -199,7 +197,7 @@ the CLR:
 - `OutOfMemoryException`
 - other :`SystemException`
 
-In addition, local sends can fail in Akka-specific ways:
+In addition, local sends can fail in ProtoActor-specific ways:
 
 - if the mailbox does not accept the message (e.g. full `BoundedMailbox`)
 - if the receiving actor fails while processing the message or is already
@@ -247,7 +245,7 @@ As a speculative view into the future it might be possible to support this order
 ##Higher-level abstractions
 
 
-Based on a small and consistent tool set in Akka's core, Akka.NET also provides
+Based on a small and consistent tool set in ProtoActor's core, ProtoAct also provides
 powerful, higher-level abstractions on top it.
 
 ###Messaging Patterns
@@ -262,7 +260,7 @@ delivery is an explicit ACK–RETRY protocol. In its simplest form this requires
 
 The third becomes necessary by virtue of the acknowledgements not being guaranteed
 to arrive either. An ACK-RETRY protocol with business-level acknowledgements is
-supported by [[At least once delivery]] of the Akka.NET Persistence module. Duplicates can be
+supported by [[At least once delivery]] of the ProtoAct Persistence module. Duplicates can be
 detected by tracking the identifiers of messages sent via [[At least once delivery]].
 Another way of implementing the third part would be to make processing the messages
 idempotent on the level of the business logic.
@@ -284,7 +282,7 @@ state on a different continent or to react to changes). If the component's
 state is lost—due to a machine failure or by being pushed out of a cache—it can
 easily be reconstructed by replaying the event stream (usually employing
 snapshots to speed up the process). :ref:`event-sourcing` is supported by
-Akka.NET Persistence.
+ProtoAct Persistence.
 
 ###Mailbox with Explicit Acknowledgement
 
@@ -301,7 +299,7 @@ An example implementation of this pattern is shown at :ref:`mailbox-acking`.
 ##Dead Letters
 
 Messages which cannot be delivered (and for which this can be ascertained) will
-be delivered to a synthetic actor called ``/deadLetters``. This delivery
+be delivered to a synthetic actor called `/deadLetters`. This delivery
 happens on a best-effort basis; it may fail even within a single application in the local machine (e.g.
 during actor termination). Messages sent via unreliable network transports will
 be lost without turning up as dead letters.
@@ -324,7 +322,7 @@ guaranteed delivery.
 
 ###How do I Receive Dead Letters?
 
-An actor can subscribe to class `Akka.Actor.DeadLetter` on the event
+An actor can subscribe to class `DeadLetter` on the event
 stream, see [[event stream]] for how to do that. The subscribed actor will then receive all dead
 letters published in the (local) system from that point onwards. Dead letters
 are not propagated over the network, if you want to collect them in one place
@@ -339,9 +337,9 @@ local system (if no network connection can be established) or the remote one
 Every time an actor does not terminate by its own decision, there is a chance
 that some messages which it sends to itself are lost. There is one which
 happens quite easily in complex shutdown scenarios that is usually benign:
-seeing a `Akka.Dispatch.Terminate` message dropped means that two
+seeing a `Terminate` message dropped means that two
 termination requests were given, but of course only one can succeed. In the
-same vein, you might see `Akka.Actor.Terminated` messages from children
+same vein, you might see `Terminated` messages from children
 while stopping a hierarchy of actors turning up in dead letters if the parent
 is still watching the child when the parent terminates.
 

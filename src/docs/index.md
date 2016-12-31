@@ -16,6 +16,8 @@ title: ProtoAct Documentation
 - [Supervision and Monitoring](Supervision)
 - [Location Transparency](Location Transparency)
 - [Message Delivery Reliability](Durability)
+- [Routers](Routers)
+- [Receive Timeout](Receive Timeout)
 
 ## Languages APIs
 - [Golang](golang/index)

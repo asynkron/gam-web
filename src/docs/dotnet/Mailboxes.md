@@ -22,12 +22,6 @@ To make an actor use a specific mailbox, you can set it up the following way:
 var props = Actor.FromProducer(() => new MyActor()).WithMailbox(MyMailboxProducer);
 ```
 
-## Golang
-```go
-props := actor.FromProducer(func() ActorProducer {return &myActor{}}).WithMailbox(MyMailboxProducer)
-```
-
-
 ### Built-in Mailboxes
 
 The build in mailboxes differ between language implementations
@@ -37,9 +31,3 @@ The build in mailboxes differ between language implementations
 * UnboundedMailbox
 
   **This is the default mailbox** used by ProtoAct. It's a non-blocking unbounded mailbox, and should be good enough for most cases.
-
-### Golang Mailboxes
-
-* UnboundedMailbox
-* UnboundedLockfreeMailbox
-* BoundedMailbox

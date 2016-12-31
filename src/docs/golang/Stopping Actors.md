@@ -106,8 +106,5 @@ You `GracefulStop` an actor like this:
 var shutdown = targetActorRef.GracefulStop(TimeSpan.FromSeconds(5));
 ```
 
-## Additional Resources
-- [How to Stop an Actor... the Right Way](https://petabridge.com/blog/how-to-stop-an-actor-akkadotnet/)
-
 ### Related Documentation
 - [Working With Actors - Stopping an Actor](../Working with actors#stopping-actors)

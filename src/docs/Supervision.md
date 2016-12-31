@@ -77,39 +77,3 @@ The `AllForOneStrategy` is applicable in cases where the ensemble of children ha
 ![All for one](images/AllForOne.png)
 
 Normally stopping a child (i.e. not in response to a failure) will not automatically terminate the other children in an all-for-one strategy; this can easily be done by watching their lifecycle: if the `Terminated` message is not handled by the supervisor, it will throw a `DeathPactException` which (depending on its supervisor) will restart it, and the default `PreRestart` action will terminate all children. Of course this can be handled explicitly as well.
-
-Please note that creating one-off actors from an all-for-one supervisor entails that failures escalated by the temporary actor will affect all the permanent ones. If this is not desired, install an intermediate supervisor; this can very easily be done by declaring a router of size 1 for the worker, see [[Routing]].
-
-#### Example supervisor strategy
-
-```csharp
-public class MyActor : UntypedActor
-{
-    private ActorRef logger = Context.ActorOf<LogActor>();
-
-    // if any child, e.g. the logger above. throws an exception
-    // apply the rules below
-    // e.g. Restart the child, if 10 exceptions occur in 30 seconds or
-    // less, then stop the actor
-    protected override SupervisorStrategy SupervisorStrategy()
-    {
-        return new OneForOneStrategy( //or AllForOneStrategy
-            maxNumberOfRetries: 10,
-            duration: TimeSpan.FromSeconds(30),
-            decider: Decider.From(x =>
-            {
-                //Maybe we consider ArithmeticException to not be application critical
-                //so we just ignore the error and keep going.
-                if (x is ArithmeticException) return Directive.Resume;
-
-                //Error that we cannot recover from, stop the failing actor
-                else if (x is NotSupportedException) return Directive.Stop;
-
-                //In all other cases, just restart the failing actor
-                else return Directive.Restart;
-            }));
-    }
-
-    ...
-}
-```

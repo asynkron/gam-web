@@ -2,9 +2,9 @@
 layout: docs.hbs
 title: Getting started
 ---
-# Getting started with GAM
+# Getting started with ProtoAct
 
-This tutorial is intended to give an introduction to using GAM by creating a simple greeter actor using C#.
+This tutorial is intended to give an introduction to using ProtoAct by creating a simple greeter actor using C#.
 
 ## Set up your project
 
@@ -12,7 +12,7 @@ Start visual studio and create a new C# Console Application.
 Once we have our console application, we need to open up the Package Manager Console and type:
 
 ```PM
-PM> Install-Package GAM
+PM> Install-Package Proto.Actor
 ```
 
 Then we need to add the relevant using statements:
@@ -25,7 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 //Add these two lines
-using GAM;
+using Proto.Actor;
 
 namespace ConsoleApplication11
 {
@@ -49,7 +49,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using GAM;
+using Proto.Actor;
 
 namespace ConsoleApplication11
 {
@@ -81,7 +81,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using GAM;
+using Proto.Actor;
 
 namespace ConsoleApplication11
 {
@@ -127,7 +127,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using GAM;
+using ProtoAct;
 
 namespace ConsoleApplication11
 {

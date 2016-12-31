@@ -5,7 +5,7 @@ title: Terminology and Concepts
 
 # Terminology and Concepts
 
-In this chapter we attempt to establish a common terminology to define a solid ground for communicating about concurrent, distributed systems which GAM targets. Please note that, for many of these terms, there is no single agreed definition. We simply seek to give working definitions that will be used in the scope of the GAM documentation.
+In this chapter we attempt to establish a common terminology to define a solid ground for communicating about concurrent, distributed systems which ProtoAct targets. Please note that, for many of these terms, there is no single agreed definition. We simply seek to give working definitions that will be used in the scope of the ProtoAct documentation.
 
 ## Concurrency vs. Parallelism
 Concurrency and parallelism are related concepts, but there are small differences. Concurrency means that two or more tasks are making progress even though they might not be executing simultaneously. This can for example be realized with time slicing where parts of tasks are executed sequentially and mixed with parts of other tasks. Parallelism on the other hand arise when the execution can be truly simultaneous.
@@ -37,7 +37,7 @@ We call it a Race condition when an assumption about the ordering of a set of ev
 
 >Note
 >
->The only guarantee that GAM provides about messages sent between a given pair of actors is that their order is always preserved. see [Message Delivery Reliability](message-delivery-reliability)
+>The only guarantee that ProtoAct provides about messages sent between a given pair of actors is that their order is always preserved. see [Message Delivery Reliability](message-delivery-reliability)
 
 ## Non-blocking Guarantees (Progress Conditions)
 As discussed in the previous sections blocking is undesirable for several reasons, including the dangers of deadlocks and reduced throughput in the system. In the following sections we discuss various non-blocking properties with different strength.

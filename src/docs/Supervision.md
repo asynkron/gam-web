@@ -29,7 +29,7 @@ ProtoAct implements a specific form called “parental supervision”. Actors ca
 
 ## The Top-Level Supervisors
 
-![Top level supervisors](/images/TopLevelSupervisors.png)
+![Top level supervisors](images/TopLevelSupervisors.png)
 
 An actor system will during its creation start at least three actors, shown in the image above. For more information about the consequences for actor paths see Top-Level Scopes for Actor Paths.
 

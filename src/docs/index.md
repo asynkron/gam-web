@@ -7,7 +7,6 @@ title: ProtoAct Documentation
 ## Introduction
 - [What is ProtoAct?](What is ProtoAct)
 - [Why ProtoAct?](Why ProtoAct)
-- [The Obligatory Hello World](The Obligatory Hello World)
 
 ## ProtoAct Concepts
 - [What is an Actor?](Actors)
@@ -16,8 +15,6 @@ title: ProtoAct Documentation
 - [Supervision and Monitoring](Supervision)
 - [Location Transparency](Location Transparency)
 - [Message Delivery Reliability](Durability)
-- [Routers](Routers)
-- [Receive Timeout](Receive Timeout)
 
 ## Languages APIs
 - [Golang](golang/index)

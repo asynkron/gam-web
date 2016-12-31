@@ -5,7 +5,7 @@ title: Supervision
 
 # Supervision
 
-This document outlines the concept behind supervision and what that means for your Akka.NET actors at run-time.
+This document outlines the concept behind supervision and what that means for your ProtoAct actors at run-time.
 
 ## What Supervision Means
 As described in [Actor Systems](actorsystems) supervision describes a dependency relationship between actors: the supervisor delegates tasks to subordinates and therefore must respond to their failures. When a subordinate detects a failure (i.e. throws an exception), it suspends itself and all its subordinates and sends a message to its supervisor, signaling failure. Depending on the nature of the work to be supervised and the nature of the failure, the supervisor has a choice of the following four options:
@@ -19,7 +19,7 @@ It is important to always view an actor as part of a supervision hierarchy, whic
 
 Each supervisor is configured with a function translating all possible failure causes (i.e. exceptions) into one of the four choices given above; notably, this function does not take the failed actor's identity as an input. It is quite easy to come up with examples of structures where this might not seem flexible enough, e.g. wishing for different strategies to be applied to different subordinates. At this point it is vital to understand that supervision is about forming a recursive fault handling structure. If you try to do too much at one level, it will become hard to reason about, hence the recommended way in this case is to add a level of supervision.
 
-Akka.NET implements a specific form called “parental supervision”. Actors can only be created by other actors—where the top-level actor is provided by the library—and each created actor is supervised by its parent. This restriction makes the formation of actor supervision hierarchies implicit and encourages sound design decisions. It should be noted that this also guarantees that actors cannot be orphaned or attached to supervisors from the outside, which might otherwise catch them unawares. In addition, this yields a natural and clean shutdown procedure for (sub-trees of) actor applications.
+ProtoAct implements a specific form called “parental supervision”. Actors can only be created by other actors—where the top-level actor is provided by the library—and each created actor is supervised by its parent. This restriction makes the formation of actor supervision hierarchies implicit and encourages sound design decisions. It should be noted that this also guarantees that actors cannot be orphaned or attached to supervisors from the outside, which might otherwise catch them unawares. In addition, this yields a natural and clean shutdown procedure for (sub-trees of) actor applications.
 
 >**Warning**<br/>
 >Supervision related parent-child communication happens by special system messages that have their own <br/>
@@ -32,12 +32,6 @@ Akka.NET implements a specific form called “parental supervision”. Actors ca
 ![Top level supervisors](../images/TopLevelSupervisors.png)
 
 An actor system will during its creation start at least three actors, shown in the image above. For more information about the consequences for actor paths see Top-Level Scopes for Actor Paths.
-
-### `/user`: The Guardian Actor
-The actor which is probably most interacted with is the parent of all user-created actors, the guardian named `"/user"`. Actors created using `system.ActorOf()` are children of this actor. This means that when this guardian terminates, all normal actors in the system will be shutdown, too. It also means that this guardian's supervisor strategy determines how the top-level normal actors are supervised. Since Akka.NET 1.0 it is possible to configure this using the setting `akka.actor.guardian-supervisor-strategy`, which takes the fully-qualified class-name of a `SupervisorStrategyConfigurator`. When the guardian escalates a failure, the root guardian's response will be to terminate the guardian, which in effect will shut down the whole actor system.
-
-### `/system`: The System Guardian
-This special guardian has been introduced in order to achieve an orderly shut-down sequence where logging remains active while all normal actors terminate, even though logging itself is implemented using actors. This is realized by having the system guardian watch the user guardian and initiate its own shut-down upon reception of the `Terminated` message. The top-level system actors are supervised using a strategy which will restart indefinitely upon all types of Exception except for `ActorInitializationException` and `ActorKilledException`, which will terminate the child in question. All other exceptions are escalated, which will shut down the whole actor system.
 
 ### `/`: The Root Guardian
 The root guardian is the grand-parent of all so-called “top-level” actors and supervises all the special actors mentioned in Top-Level Scopes for Actor Paths using the `SupervisorStrategy.StoppingStrategy`, whose purpose is to terminate the child upon any type of Exception. All other throwables will be escalated … but to whom? Since every real actor has a supervisor, the supervisor of the root guardian cannot be a real actor. And because this means that it is “outside of the bubble”, it is called the “bubble-walker”. This is a synthetic ActorRef which in effect stops its child upon the first sign of trouble and sets the actor system's isTerminated status to true as soon as the root guardian is fully terminated (all children recursively stopped).
@@ -53,7 +47,7 @@ Unless the failure is specifically recognizable, the third cause cannot be ruled
 
 The precise sequence of events during a restart is the following:
 
-1. Suspend the actor (which means that it will not process normal messages until resumed), and recursively suspend all children.
+1. Suspend the actor (which means that it will not process normal messages until resumed).
 2. Call the old instance's `PreRestart` hook (defaults to sending termination requests to all children and calling postStop)
 3. Wait for all children which were requested to terminate (using `context.Stop()`) during `PreRestart` to actually terminate; this—like all actor operations—is non-blocking, the termination notice from the last killed child will effect the progression to the next step.
 4. Create new actor instance by invoking the originally provided factory again.
@@ -63,7 +57,7 @@ The precise sequence of events during a restart is the following:
 
 ##What Lifecycle Monitoring Means
 >**Note**<br/>
->Lifecycle Monitoring in Akka.NET is usually referred to as `DeathWatch`
+>Lifecycle Monitoring in ProtoAct is usually referred to as `DeathWatch`
 
 In contrast to the special relationship between parent and child described above, each actor may monitor any other actor. Since actors emerge from creation fully alive and restarts are not visible outside of the affected supervisors, the only state change available for monitoring is the transition from alive to dead. Monitoring is thus used to tie one actor to another so that it may react to the other actor's termination, in contrast to supervision which reacts to failure.
 

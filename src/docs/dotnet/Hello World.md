@@ -2,8 +2,8 @@
 layout: docs.hbs
 title: The Obligatory Hello World
 ---
-#  The Obligatory Hello World
-This example shows how to define and consume actors in Golang
+#  The Obligatory Hello World - DotNet
+This example shows how to define and consume actors in C#
 
 ## Hello World using the Golang API
 #### Define a message:

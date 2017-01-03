@@ -18,7 +18,7 @@ title: ProtoAct Documentation
 
 ## Languages APIs
 - [Golang](golang/index)
-- [C#/.NET](csharp/index)
+- [C#/.NET](dotnet/index)
 
 ## Additional Information
 - [Books](Books)

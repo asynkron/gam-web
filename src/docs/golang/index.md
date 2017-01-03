@@ -4,6 +4,8 @@ title: Golang Documentation
 ---
 # Golang documentation
 
+<iframe src="https://ghbtns.com/github-btn.html?user=AsynkronIT&repo=protoactor-go&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+
 ## Actor
 - [Hello World](Hello World)
 - [Props](Props)

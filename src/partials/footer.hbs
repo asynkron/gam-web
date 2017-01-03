@@ -12,14 +12,27 @@
 
 					<div class="alert alert-danger hidden" id="newsletterError"></div>
 
-					<form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST" novalidate="novalidate">
+					<!-- Begin MailChimp Signup Form -->
+					<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+					<style type="text/css">
+						#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+						/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+						We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+					</style>
+					<div id="mc_embed_signup">
+					<form action="//Actor.us14.list-manage.com/subscribe/post?u=bd9111d0535c3aa2d2724f234&amp;id=ac3060226b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 						<div class="input-group">
-							<input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+							<input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="email address" required>
+							<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+							<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_bd9111d0535c3aa2d2724f234_ac3060226b" tabindex="-1" value=""></div>
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit">Go!</button>
+								<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">
 							</span>
 						</div>
 					</form>
+					</div>
+
+					<!--End mc_embed_signup-->
 				</div>
 			</div>
 			<div class="col-md-4">

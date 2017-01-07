@@ -11,8 +11,6 @@ This is accomplished by replacing the method that handles messages inside the ac
 
 > **Note:**<br /> When you change the actor behavior, the new behaviour will take effect for all subsequent messages until the behaviour is changed again. The current message will continue processing with the existing behaviour. You can use [Stashing](Stashing Messages) to reprocess the current message with the new behavior.
 
-<iframe width="100%" height="475" src="https://dotnetfiddle.net/Widget/F96W0B" frameborder="0"></iframe>
-
 ## API
 
 The API to change behaviors is available to the actor instance is very simple:
@@ -23,33 +21,41 @@ The API to change behaviors is available to the actor instance is very simple:
 
 The example below shows how to switch behaviors using `Become`:
 
-```cs
-void Receive(object message)
-{
-    Log.Info("Handled by Receive");
-    Become(AlternativeReceive);
+```gol
+func (state *BecomeActor) Receive(context actor.Context) {
+    switch msg := context.Message().(type) {
+    case Hello:
+        fmt.Printf("Hello %v\n", msg.Who)
+        context.Become(state.Other)
+    }
 }
 
-void AlternativeReceive(object message)
-{
-    Log.Info("Handled by AlternativeReceive");
-    Become(Receive);
+func (state *BecomeActor) Other(context actor.Context) {
+    switch msg := context.Message().(type) {
+    case Hello:
+        fmt.Printf("%v, ey we are now handling messages in another behavior", msg.Who)
+        context.Become(state.Receive)
+    }
 }
 ```
 
 The example below shows how to accomplish the same goal using `BecomeStacked/UnbecomeStacked`:
 
 ```cs
-void Receive(object message)
-{
-    Log.Info("Handled by Receive");
-    BecomeStacked(AlternativeReceive);
+func (state *BecomeActor) Receive(context actor.Context) {
+    switch msg := context.Message().(type) {
+    case Hello:
+        fmt.Printf("Hello %v\n", msg.Who)
+        context.BecomeStacked(state.Other)
+    }
 }
 
-void AlternativeReceive(object message)
-{
-    Log.Info("Handled by AlternativeReceive");
-    UnbecomeStacked();
+func (state *BecomeActor) Other(context actor.Context) {
+    switch msg := context.Message().(type) {
+    case Hello:
+        fmt.Printf("%v, ey we are now handling messages in another behavior", msg.Who)
+        context.UnbecomeStacked()
+    }
 }
 ```
 
@@ -61,15 +67,14 @@ Actors always have a default behavior. This behavior is whatever logic you defin
 
 For example:
 
-```cs
-protected override void OnReceive(object m1)
-{
-    Console.WriteLine("Ping " + m1);
-
-    BecomeStacked(m2 => {
-        Console.WriteLine("Pong " + m2);
-        UnbecomeStacked();
-    });
+```go
+func (state *BecomeActor) Receive(context actor.Context) {
+    fmt.Println("Ping")
+    context.BecomeStacked(func(ctx actor.Context)
+    {
+        fmt.Println("Pong")
+        ctx.UnbecomeStacked()
+    })
 }
 ```
 
@@ -77,6 +82,5 @@ Although the syntax of the methods are simple, it may not be clear at first how 
 
 But that's not what happens. As you can see in the demo below, this code switches between `Ping` and `Pong` as expected.
 
-The trick here is that Akka.NET internally calls `Become(OnReceive)` when the actor is created, making that the default behavior. So, when you call `BecomeStacked(m2 => { ... })`, you are just replacing that behavior. This sample is created using UntypedActor, but the same is true for any other actor.
+The trick here is that Proto.Actor internally calls `Become(actor.Receive)` when the actor is created, making that the default behavior. So, when you call `BecomeStacked(...)`, you are just replacing that behavior. This sample is created using UntypedActor, but the same is true for any other actor.
 
-<iframe width="100%" height="475" src="https://dotnetfiddle.net/Widget/U2UEHZ" frameborder="0"></iframe>

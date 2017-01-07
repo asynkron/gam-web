@@ -7,6 +7,7 @@ title: ProtoAct Documentation
 ## Introduction
 - [What is ProtoAct?](What is ProtoAct)
 - [Why ProtoAct?](Why ProtoAct)
+- [Design Principles](Design Principles)
 
 ## ProtoAct Concepts
 - [What is an Actor?](Actors)

@@ -5,7 +5,7 @@ title: Supervision
 
 # Supervision
 
-This document outlines the concept behind supervision and what that means for your ProtoAct actors at run-time.
+This document outlines the concept behind supervision and what that means for your Proto.Actor actors at run-time.
 
 ## What Supervision Means
 Supervision describes a dependency relationship between actors: the supervisor delegates tasks to subordinates and therefore must respond to their failures. When a subordinate detects a failure (i.e. throws an exception), it suspends itself and all its subordinates and sends a message to its supervisor, signaling failure. Depending on the nature of the work to be supervised and the nature of the failure, the supervisor has a choice of the following four options:
@@ -19,7 +19,7 @@ It is important to always view an actor as part of a supervision hierarchy, whic
 
 Each supervisor is configured with a function translating all possible failure causes (i.e. exceptions) into one of the four choices given above; notably, this function does not take the failed actor's identity as an input. It is quite easy to come up with examples of structures where this might not seem flexible enough, e.g. wishing for different strategies to be applied to different subordinates. At this point it is vital to understand that supervision is about forming a recursive fault handling structure. If you try to do too much at one level, it will become hard to reason about, hence the recommended way in this case is to add a level of supervision.
 
-ProtoAct implements a specific form called “parental supervision”. Actors can only be created by other actors—where the top-level actor is provided by the library—and each created actor is supervised by its parent. This restriction makes the formation of actor supervision hierarchies implicit and encourages sound design decisions. It should be noted that this also guarantees that actors cannot be orphaned or attached to supervisors from the outside, which might otherwise catch them unawares. In addition, this yields a natural and clean shutdown procedure for (sub-trees of) actor applications.
+Proto.Actor implements a specific form called “parental supervision”. Actors can only be created by other actors—where the top-level actor is provided by the library—and each created actor is supervised by its parent. This restriction makes the formation of actor supervision hierarchies implicit and encourages sound design decisions. It should be noted that this also guarantees that actors cannot be orphaned or attached to supervisors from the outside, which might otherwise catch them unawares. In addition, this yields a natural and clean shutdown procedure for (sub-trees of) actor applications.
 
 >**Warning**<br/>
 >Supervision related parent-child communication happens by special system messages that have their own <br/>
@@ -57,7 +57,7 @@ The precise sequence of events during a restart is the following:
 
 ##What Lifecycle Monitoring Means
 >**Note**<br/>
->Lifecycle Monitoring in ProtoAct is usually referred to as `DeathWatch`
+>Lifecycle Monitoring in Proto.Actor is usually referred to as `DeathWatch`
 
 In contrast to the special relationship between parent and child described above, each actor may monitor any other actor. Since actors emerge from creation fully alive and restarts are not visible outside of the affected supervisors, the only state change available for monitoring is the transition from alive to dead. Monitoring is thus used to tie one actor to another so that it may react to the other actor's termination, in contrast to supervision which reacts to failure.
 
@@ -68,7 +68,7 @@ Monitoring is particularly useful if a supervisor cannot simply restart its chil
 Another common use case is that an actor needs to fail in the absence of an external resource, which may also be one of its own children. If a third party terminates a child by way of the `system.Stop(child)` method or sending a `PoisonPill`, the supervisor might well be affected.
 
 ###One-For-One Strategy vs. All-For-One Strategy
-There are two classes of supervision strategies which come with ProtoAct: `OneForOneStrategy` and `AllForOneStrategy`. Both are configured with a mapping from exception type to supervision directive (see above) and limits on how often a child is allowed to fail before terminating it. The difference between them is that the former applies the obtained directive only to the failed child, whereas the latter applies it to all siblings as well. Normally, you should use the `OneForOneStrategy`, which also is the default if none is specified explicitly.
+There are two classes of supervision strategies which come with Proto.Actor: `OneForOneStrategy` and `AllForOneStrategy`. Both are configured with a mapping from exception type to supervision directive (see above) and limits on how often a child is allowed to fail before terminating it. The difference between them is that the former applies the obtained directive only to the failed child, whereas the latter applies it to all siblings as well. Normally, you should use the `OneForOneStrategy`, which also is the default if none is specified explicitly.
 
 ![One for one](images/OneForOne.png)
 

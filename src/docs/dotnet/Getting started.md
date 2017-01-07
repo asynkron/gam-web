@@ -2,9 +2,9 @@
 layout: docs.hbs
 title: Getting started
 ---
-# Getting started with ProtoAct
+# Getting started with Proto.Actor
 
-This tutorial is intended to give an introduction to using ProtoAct by creating a simple greeter actor using C#.
+This tutorial is intended to give an introduction to using Proto.Actor by creating a simple greeter actor using C#.
 
 ## Set up your project
 
@@ -127,7 +127,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ProtoAct;
+using Proto;
 
 namespace ConsoleApplication11
 {

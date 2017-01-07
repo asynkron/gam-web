@@ -5,7 +5,7 @@ title: Message Delivery Reliability
 
 # Message Delivery Reliability
 
-ProtoAct helps you build reliable applications which make use of multiple processor
+Proto.Actor helps you build reliable applications which make use of multiple processor
 cores in one machine (“scaling up”) or distributed across a computer network
 (“scaling out”). The key abstraction to make this work is that all interactions
 between your code units—actors—happen via message passing, which is why the
@@ -44,7 +44,7 @@ also underlies the `Request` pattern):
 * **message ordering per sender–receiver pair**
 
 The first rule is typically found also in other actor implementations while the
-second is specific to ProtoAct.
+second is specific to Proto.Actor.
 
 ## Discussion: What does “at-most-once” mean?
 
@@ -93,15 +93,15 @@ decide upon the “successfully” part of point five.
 Along those same lines goes the reasoning in `Nobody Needs Reliable
 Messaging`_. The only meaningful way for a sender to know whether an
 interaction was successful is by receiving a business-level acknowledgement
-message, which is not something ProtoAct could make up on its own (neither are we
+message, which is not something Proto.Actor could make up on its own (neither are we
 writing a “do what I mean” framework nor would you want us to).
 
-ProtoAct embraces distributed computing and makes the fallibility of communication
+Proto.Actor embraces distributed computing and makes the fallibility of communication
 explicit through message passing, therefore it does not try to lie and emulate
 a leaky abstraction. This is a model that has been used with great success in
 Erlang and requires the users to design their applications around it. You can
 read more about this approach in the `Erlang documentation`_ (section 10.9 and
-10.10), ProtoAct follows it closely.
+10.10), Proto.Actor follows it closely.
 
 Another angle on this issue is that by providing only basic guarantees those
 use cases which do not need stronger reliability do not pay the cost of their
@@ -187,7 +187,7 @@ this you should only rely on The [General Rules]().
 
 ###Reliability of Local Message Sends
 
-The ProtoAct test suite relies on not losing messages in the local context (and for
+The Proto.Actor test suite relies on not losing messages in the local context (and for
 non-error condition tests also for remote deployment), meaning that we
 actually do apply the best effort to keep our tests stable. A local `Tell`
 operation can however fail for the same reasons as a normal method call can on
@@ -245,7 +245,7 @@ As a speculative view into the future it might be possible to support this order
 ##Higher-level abstractions
 
 
-Based on a small and consistent tool set in ProtoActor's core, ProtoAct also provides
+Based on a small and consistent tool set in ProtoActor's core, Proto.Actor also provides
 powerful, higher-level abstractions on top it.
 
 ###Messaging Patterns
@@ -260,7 +260,7 @@ delivery is an explicit ACK–RETRY protocol. In its simplest form this requires
 
 The third becomes necessary by virtue of the acknowledgements not being guaranteed
 to arrive either. An ACK-RETRY protocol with business-level acknowledgements is
-supported by [[At least once delivery]] of the ProtoAct Persistence module. Duplicates can be
+supported by [[At least once delivery]] of the Proto.Actor Persistence module. Duplicates can be
 detected by tracking the identifiers of messages sent via [[At least once delivery]].
 Another way of implementing the third part would be to make processing the messages
 idempotent on the level of the business logic.
@@ -282,7 +282,7 @@ state on a different continent or to react to changes). If the component's
 state is lost—due to a machine failure or by being pushed out of a cache—it can
 easily be reconstructed by replaying the event stream (usually employing
 snapshots to speed up the process). :ref:`event-sourcing` is supported by
-ProtoAct Persistence.
+Proto.Actor Persistence.
 
 ###Mailbox with Explicit Acknowledgement
 

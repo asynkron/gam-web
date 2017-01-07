@@ -1,15 +1,15 @@
 ---
 layout: docs.hbs
-title: ProtoAct Documentation
+title: Proto.Actor Documentation
 ---
 
-# ProtoAct Framework
+# Proto.Actor Framework
 ## Introduction
-- [What is ProtoAct?](What is ProtoAct)
-- [Why ProtoAct?](Why ProtoAct)
+- [What is Proto.Actor?](What is ProtoAct)
+- [Why Proto.Actor?](Why ProtoAct)
 - [Design Principles](Design Principles)
 
-## ProtoAct Concepts
+## Proto.Actor Concepts
 - [What is an Actor?](Actors)
 - [What is a Message?](Messages)
 - [Terminology, Concepts](Terminology)

@@ -1,13 +1,13 @@
 ---
 layout: docs.hbs
-title: Why ProtoAct
+title: Why Proto.Actor
 ---
-# Why ProtoAct?
+# Why Proto.Actor?
 
-## What features can the ProtoAct platform offer over the competition?
-ProtoAct provides scalable, real-time transaction processing.
+## What features can the Proto.Actor platform offer over the competition?
+Proto.Actor provides scalable, real-time transaction processing.
 
-ProtoAct is a unified runtime and programming model for:
+Proto.Actor is a unified runtime and programming model for:
 
 * Scale up (Concurrency)
 * Scale out (Remoting)
@@ -15,12 +15,12 @@ ProtoAct is a unified runtime and programming model for:
 
 With one thing to learn and admin, with high cohesion and coherent semantics.
 
-ProtoAct is a very scalable piece of software; not only in the context of performance, but also in the size of applications it is useful for. The core of ProtoAct, ProtoAct-Actor, is very small and it can easily be dropped into an existing project where you need asynchronicity and lockless concurrency without hassle.
+Proto.Actor is a very scalable piece of software; not only in the context of performance, but also in the size of applications it is useful for. The core of Proto.Actor, Proto.Actor-Actor, is very small and it can easily be dropped into an existing project where you need asynchronicity and lockless concurrency without hassle.
 
-You can choose to include only the parts of ProtoAct you need in your application or you can use the whole package with persistence and clustering.
+You can choose to include only the parts of Proto.Actor you need in your application or you can use the whole package with persistence and clustering.
 
-## What's a good use case for ProtoAct?
-We see ProtoAct being adopted by many large organizations in a wide range of industries:
+## What's a good use case for Proto.Actor?
+We see Proto.Actor being adopted by many large organizations in a wide range of industries:
 
 * Investment and Merchant Banking
 * Retail
@@ -31,7 +31,7 @@ We see ProtoAct being adopted by many large organizations in a wide range of ind
 * Health Care
 * Data Analytics
 
-and many more. Any system with the need for high throughput and low latency is a good candidate for using ProtoAct.
+and many more. Any system with the need for high throughput and low latency is a good candidate for using Proto.Actor.
 
 Actors let you manage service failures (Supervisors), load management (back-off strategies, timeouts and processing-isolation), as well as both horizontal and vertical scalability (add more cores and/or add more machines).
 

@@ -9,7 +9,7 @@ A *router* is a special type of actor whose job is to route messages to other ac
 
 Routers can be used inside or outside of an actor, and you can manage the routees yourself or use a self contained router actor with configuration capabilities, and can also [resize dynamically](#dynamically-resizable-pools) under load.
 
-ProtoAct comes with several useful routers you can choose right out of the box, according to your application's needs. But it is also possible to create your own.
+Proto.Actor comes with several useful routers you can choose right out of the box, according to your application's needs. But it is also possible to create your own.
 
 > **Note:**<br/>
 > In general, any message sent to a router will be forwarded to one of its routees, but there is one exception.
@@ -62,7 +62,7 @@ By default, pool routers use a custom strategy that only returns `Escalate` for 
 
 ## Routing Strategies
 
-These are the routing strategies provided by ProtoAct out of the box.
+These are the routing strategies provided by Proto.Actor out of the box.
 
 ### RoundRobin
 
@@ -176,7 +176,7 @@ There are 3 ways to define what data to use for the consistent hash key.
   var msg = new ConsistentHashableEnvelope(originalMsg, originalMsg.GroupID);
 ```
 
-You may implement more than one hashing mechanism at the same time. ProtoAct will try them in the order above. That is, if the HashMapping method returns null, ProtoAct will check for the IConsistentHashable interface in the message (2 and 3 are technically the same).
+You may implement more than one hashing mechanism at the same time. Proto.Actor will try them in the order above. That is, if the HashMapping method returns null, Proto.Actor will check for the IConsistentHashable interface in the message (2 and 3 are technically the same).
 
 #### Usage:
 
@@ -209,7 +209,7 @@ The `SmallestMailboxPool` router will send the message to the routee with fewest
 SmallestMailboxPool defined in configuration:
 
 ```hocon
-ProtoAct.actor.deployment {
+Proto.Actor.actor.deployment {
   /some-pool {
     router = smallest-mailbox-pool
     nr-of-instances = 5
@@ -283,7 +283,7 @@ In this example, the router received the `Broadcast` message, extracted its payl
 
 ## Advanced
 
-### How Routing is Designed within ProtoAct
+### How Routing is Designed within Proto.Actor
 
 On the surface routers look like normal actors, but they are actually implemented differently. Routers are designed to be extremely efficient at receiving messages and passing them quickly on to routees.
 

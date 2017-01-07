@@ -28,19 +28,30 @@
 														</a>
 													</li>
 													<li class="{{#ifEq page.layout 'docs.hbs' }} active{{/ifEq}}">
-														<a href="/docs/index.html">
-															Documentation
+														<a href="#">
+															Documentation <i class="fa fa-caret-down"></i>
 														</a>
+														<ul class="dropdown-menu">
+															<li >
+																<a href="/docs/index">Overview</a>
+															</li>
+															<li >
+																<a href="/docs/dotnet/index">C#/.NET</a>
+															</li>
+															<li >
+																<a href="/docs/golang/index">Go</a>
+															</li>
+														</ul>
 													</li>
 													<li class="dropdown">
 														<a href="#">
 															Code <i class="fa fa-caret-down"></i>
 														</a>
 														<ul class="dropdown-menu">
-															<li class="dropdown-submenu">
+															<li >
 																<a href="https://github.com/AsynkronIT/protoactor-dotnet">C#</a>
 															</li>
-															<li class="dropdown-submenu">
+															<li >
 																<a href="https://github.com/AsynkronIT/protoactor-go">Go</a>
 															</li>
 														</ul>

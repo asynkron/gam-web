@@ -4,10 +4,10 @@
 We welcome contributions from anyone! Contributions to the docs can be done in two ways:
 
 1. Fork and Clone this repository, and send your changes in via pull request. [*Read and follow the docs guidelines here*](DOCS_GUIDELINES.md).
-2. You can use the `Edit on GitHub` link on each page of [the live docs](http://getakka.net/docs), this will take you to an edit mode version of the page here on GitHub. If you don't have commit rights for this repo, Github will allow you to make an ad hoc pull request right there.
+2. You can use the `Edit on GitHub` link on each page of [the live docs](http://proto.actor/docs), this will take you to an edit mode version of the page here on GitHub. If you don't have commit rights for this repo, Github will allow you to make an ad hoc pull request right there.
 
 ## Deployment
-The [live site](http://GetAkka.NET) will be built & redeployed whenever a change is made to the master branch of this repository.
+The [live site](http://Proto.Actor) will be built & redeployed whenever a change is made to the master branch of this repository.
 
 This usually takes a few minutes, as we use a free build server.
 
@@ -22,8 +22,8 @@ Follow the instructions on [this page](https://github.com/joyent/node/wiki/Insta
 
 ### Fork, then clone this repository.
 ```
-> git clone https://github.com/<your name here>/getakka.net.git getakkanet
-> cd getakkanet
+> git clone https://github.com/<your name here>/gam-web.git gam-web
+> cd gam-web
 ```
 
 ### Install the packages

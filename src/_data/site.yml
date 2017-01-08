@@ -1,12 +1,11 @@
 url: http://proto.actor
 title: Proto.Actor
 author: Proto.Actor
-email: hi@getakka.net
+email: hi@proto.actor
 github_url: https://github.com/AsynkronIT/protoactor/
 issues_url: https://github.com/AsynkronIT/protoactor/issues
 twitter_handle: ProtoActor
 twitter_url: https://twitter.com/ProtoActor
 stack_overflow_url: http://stackoverflow.com/questions/tagged/protoactor
 facebook_url: https://www.facebook.com/protoactor
-logo_path: /images/akkalogo.png
 gitter_url: https://gitter.im/AsynkronIT/protoactor

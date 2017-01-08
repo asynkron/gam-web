@@ -18,7 +18,7 @@ title: Proto.Actor Documentation
 - [Message Delivery Reliability](Durability)
 
 ## Languages APIs
-- [Golang](golang/index)
+- [Go](golang/index)
 - [C#/.NET](dotnet/index)
 
 ## Additional Information

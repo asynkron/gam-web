@@ -10,6 +10,6 @@ The `Context.SetReceiveTimeout` defines the inactivity timeout after which the s
 
 Once set, the receive timeout stays in effect (i.e. continues firing repeatedly after inactivity periods). Pass in `nil` / `null` to `SetReceiveTimeout` to switch off this feature.
 
-```golang
+```go
 
 ```

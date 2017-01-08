@@ -26,7 +26,7 @@ public class MyMessage
 }
 ```
 
-#### `Golang`
+#### `Go`
 ```go
 type MyMessage struct {
     Name string

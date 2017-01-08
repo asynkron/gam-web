@@ -16,7 +16,7 @@ A mailbox can be described as a queue of messages. Messages are usually then del
 To make an actor use a specific mailbox, you can set it up the following way:
 
 1. In the actor's props
-## Golang
+## Go
 ```go
 props := actor.FromProducer(MyActorProducer).WithMailbox(MyMailboxProducer)
 ```

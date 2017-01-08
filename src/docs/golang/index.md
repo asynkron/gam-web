@@ -1,8 +1,8 @@
 ---
 layout: docs.hbs
-title: Golang Documentation
+title: Go Documentation
 ---
-# Golang documentation
+# Go documentation
 
 <iframe src="https://ghbtns.com/github-btn.html?user=AsynkronIT&repo=protoactor-go&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 <iframe src="https://ghbtns.com/github-btn.html?user=AsynkronIT&repo=protoactor-go&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>

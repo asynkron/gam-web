@@ -5,7 +5,7 @@ title: The Obligatory Hello World
 #  The Obligatory Hello World - DotNet
 This example shows how to define and consume actors in C#
 
-## Hello World using the Golang API
+## Hello World using the Go API
 #### Define a message:
 ```go
 //define a struct for our message
@@ -23,7 +23,7 @@ func (state *HelloActor) Receive(context actor.Context) {
 ```
 
 #### Usage:
-```golang
+```go
 func main() {
     props := actor.FromInstance(&HelloActor{})
     pid := actor.Spawn(props)

@@ -16,11 +16,13 @@
 		Background Image - add to body:
 			data-background="/theme_assets/images/boxed_background/1.jpg"
 	-->
-	<body class="{{ page.body_classes }} ">
+	<body>
+		<div id="body">
 
-		<div id="wrapper">
 			{{> header}}
+			<div role="main" class="main">
 			{{> body }}
+			</div>
 			{{> footer }}
 
 			<a href="#" id="toTop"></a>

@@ -21,6 +21,8 @@ When an endpoint terminates, the remoting layer will send a `remoting.EndpointTe
 This can be used if you need to know about your current network topology.
 This event is also used to trigger `actor.Terminate` events for remote watched actors.
 
+![Cluster Events](/docs/images/remoteterminate.png)
+
 ## Cluster topology
 **Events**
 * `cluster.MemberStatusBatch`

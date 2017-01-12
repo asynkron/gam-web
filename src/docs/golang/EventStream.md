@@ -41,3 +41,5 @@ The member list actor use the `cluster.MemberStatusBatch` to calculate a delta o
 
 #### PartitionActor
 The `cluster.MemberStatusEvent` messages are handled by the `cluster.PartitionActor`'s to determine if virtual actor ownership should be handed over to other nodes.
+
+![Cluster Events](/docs/images/clusterevents.png)

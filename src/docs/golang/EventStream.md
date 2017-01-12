@@ -6,18 +6,25 @@ title: EventStream
 
 The EventStream is used internally in Proto.Actor to broadcast framework events.
 
-## actor.DeadLetter
+## DeadLetter
+### Events 
+* `actor.DeadLetter`
 
 When a message is sent to a non existing `PID`, the message will be forwarded to the `EventStream` as a `DeadLetter`.
 This can be used to monitor if your system holds on to broken/expired `PID`s
 
-## remoting.EndpointTerminated
+## Remote termination
+### Events
+* `remoting.EndpointTerminated`
 
 When an endpoint terminates, the remoting layer will send a `EndpointTerminated` event.
 This can be used if you need to know about your current network topology.
 This event is also used to trigger `Terminate` events for remote watched actors.
 
-## cluster.MemberStatusBatch, cluster.MemberStatusEvent
+## Cluster topology
+### Event 
+* `cluster.MemberStatusBatch`
+* `cluster.MemberStatusEvent`
 
 ### Usages
 

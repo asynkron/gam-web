@@ -24,7 +24,12 @@ This event is also used to trigger `actor.Terminate` events for remote watched a
 ## Cluster topology
 **Events**
 * `cluster.MemberStatusBatch`
-* `cluster.MemberStatusEvent`
+* `cluster.MemberStatusEvent` - *Interface*
+* `cluster.MemberJoinedEvent` - *Implements `cluster.MemberStatusEvent`*
+* `cluster.MemberRejoinedEvent` - *Implements `cluster.MemberStatusEvent`*
+* `cluster.MemberLeftEvent` - *Implements `cluster.MemberStatusEvent`*
+* `cluster.MemberUnavailableEvent` - *Implements `cluster.MemberStatusEvent`*
+* `cluster.MemberAvailableEvent` - *Implements `cluster.MemberStatusEvent`*
 
 ### Usages
 

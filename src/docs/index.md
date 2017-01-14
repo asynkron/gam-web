@@ -5,8 +5,8 @@ title: Proto.Actor Documentation
 
 # Proto.Actor Framework
 ## Introduction
-- [What is Proto.Actor?](What is ProtoAct)
-- [Why Proto.Actor?](Why ProtoAct)
+- [What is Proto.Actor?](What is ProtoActor)
+- [Why Proto.Actor?](Why ProtoActor)
 - [Design Principles](Design Principles)
 
 ## Proto.Actor Concepts

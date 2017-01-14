@@ -3,7 +3,7 @@ layout: docs.hbs
 title: Design principles
 ---
 
-# Design principles:
+# Design principles
 
 ## Minimalistic API
 The API should be small and easy to use. Avoid enterprisey JVM like containers and configurations.

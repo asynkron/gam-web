@@ -11,7 +11,7 @@ Proto.Actor was born in the Go ecosystem, these design principles was set on day
 
 ####  Minimalistic API
 Don't bloat the API, avoid enterprisey JVM like containers and configurations.
-Offload features like logging, configuration, scheduling, dependency injection to 3rd party libraries. they are not part of the core problems solved by the framework.
+Offload features like logging, configuration, scheduling and dependency injection to 3rd party libraries. they are not part of the core problems solved by the framework.
 The API should be small and easy to use
 
 ####  Build on standards

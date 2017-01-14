@@ -32,5 +32,5 @@ By following the above constraints, we gain some very nice benefits:
 ### Fast-paced development and Maintainable code
 As we are mostly gluing existing blocks together, the code is easy to understand and maintain.
 
-## Cross-platform
+### Cross-platform
 As we build on standards and existing tech and having a minimalistic codebase, we can easily port the framework to other platforms.

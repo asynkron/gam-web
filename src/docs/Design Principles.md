@@ -13,9 +13,12 @@ Offload features like logging, configuration, scheduling, dependency injection t
 Don't try to reinvent solved problems, build on proven tech and standards.
 Protobuf for serialization, gRPC Streams for network transport, Consul for cluster membership
 
+### Cross platform
+Don't rely on platform specific functionality in the communication layer.
+
 ### Message passing, not object passing
-Don't try to hide serialization. Serialization is an explicit concern.
-A message should be a clearly defined contract and not a platform specific complex object.
+Don't try to hide serialization. 
+Serialization is an explicit concern, messages should be clearly defined contracts and not arbitrary platform specific objects.
 
 ### Be fast
 Don't trade performance for magic API trickery.

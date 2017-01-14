@@ -2,10 +2,11 @@ url: http://proto.actor
 title: Proto.Actor
 author: Proto.Actor
 email: hi@proto.actor
-github_url: https://github.com/AsynkronIT/protoactor/
-issues_url: https://github.com/AsynkronIT/protoactor/issues
+github_url: https://github.com/AsynkronIT/protoactor-go/
+issues_url: https://github.com/AsynkronIT/protoactor-go/issues
 twitter_handle: ProtoActor
 twitter_url: https://twitter.com/ProtoActor
 stack_overflow_url: http://stackoverflow.com/questions/tagged/protoactor
 facebook_url: https://www.facebook.com/protoactor
-gitter_url: https://gitter.im/AsynkronIT/protoactor
+gitter_url: https://gitter.im/AsynkronIT/gam
+protoactor: Proto-Actor

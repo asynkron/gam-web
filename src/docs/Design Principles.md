@@ -5,7 +5,7 @@ title: Design principles
 
 # Design principles
 
-Proto.Actor was born in the Go ecosystem, these design principles was set on day one to conform to the Go mindset.
+{{protoactor}} was born in the Go ecosystem, these design principles was set on day one to conform to the Go mindset.
 
 ## Constraints
 

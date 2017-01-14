@@ -15,7 +15,7 @@ Offload features like logging, configuration, scheduling, dependency injection t
 The API should be small and easy to use
 
 ####  Build on standards
-Don't try to reinvent solved problems, build on proven tech and standards.
+Don't reinvent solved problems, build on proven tech and standards.
 Protobuf for serialization, gRPC Streams for network transport, Consul for cluster membership
 
 ####  Message passing, not object passing

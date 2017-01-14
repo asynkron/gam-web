@@ -22,6 +22,3 @@ Serialization is an explicit concern, messages should be clearly defined contrac
 
 ### Be fast
 Don't trade performance for magic API trickery.
-
-### Cross platform
-Don't rely on platform specific functionality, this is enabled by the "build on standards"

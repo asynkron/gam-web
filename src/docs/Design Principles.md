@@ -30,7 +30,7 @@ Don't trade performance for magic API trickery.
 By following the above constraints, we gain some very nice benefits:
 
 ####  Fast-paced development and Maintainable code
-As we are mostly gluing existing blocks together, the code is easy to understand, maintain and extend.
+We are mostly gluing existing blocks together, this means that the code is easy to understand, maintain and extend.
 
 ####  Cross-platform
-As we build on standards, platform agnostic technologies and a minimalistic codebase, we can easily port the framework to other platforms.
+We build on standards, platform agnostic technologies and a minimalistic codebase, this means that we can port the framework to other platforms.

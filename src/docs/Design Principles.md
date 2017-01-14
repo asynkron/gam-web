@@ -27,7 +27,7 @@ Don't trade performance for magic API trickery.
 
 ## Outcome
 
-By following the above constraints, we gain some very nice benefits:
+By following the above constraints, we gain some very valuable properties.
 
 ####  Fast-paced development and Maintainable code
 We are mostly gluing existing blocks together, this means that the code is easy to understand, maintain and extend.

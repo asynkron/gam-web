@@ -12,7 +12,7 @@ These two ways both yield different benefits and drawbacks.
 Proto.Actor unifies both of these two ways of working under a common framework.
 
 Proto.Actor solves another major issue, none of the pre-existing actor model frameworks or languages can communicate between platforms.
-Picking one of the old ways of working with actors, you are locked into a specific platfor.
+Picking one of the old ways of working with actors, you are locked into a specific platform.
 
 This is why Proto.Actor introduces "Actor Standard Protocol", a predefined contract of base primitives which can be consumed by different language implementations.
 This is a game changer in the field of actor systems, **you are now free to pick and choose languages for your different actor based microservices in a way never seen before.**
@@ -20,13 +20,13 @@ This is a game changer in the field of actor systems, **you are now free to pick
 ## Relation to Microsoft Orleans
 Proto.Actor is based on the same conceptual distributed hash table and automatic placement strategies as Microsoft Orleans.
 The cluster Grains are also similar in the sense that they use an RPC based interface.
-The virtual actor model have proven to be very successful and is here to stay.
+The virtual actor model has proven to be very successful and is here to stay.
 We are fully embracing this concept.
 
 Read more [VirtualActors](VirtualActors)
 
 ## Relation To Akka and Akka.NET
-The core parts of Proto.Actor loosely follows the conceptual API of Akka.
+The core parts of Proto.Actor loosely follow the conceptual API of Akka.
 
 Proto.Actor was created by Roger Johansson, the original creator of Akka.NET.
 The reason for creating yet another actor model framework was due to the many design issues faced while building Akka.NET.
@@ -39,7 +39,7 @@ secondary aspects.
 Proto.Actor uses Protobuf for serialization, a decision that vastly simplifies the way Proto.Actor works.
 Message based systems should be about passing information, not passing complex OOP object graphs or code.
 
-Proto.Actor also uses gRPC, leveraging HTTP/2 setreams for network communication.
+Proto.Actor also uses gRPC, leveraging HTTP/2 streams for network communication.
 
 ## Scalable, distributed real-time transaction processing
 We believe that writing correct, concurrent, fault-tolerant and scalable applications is too hard.
@@ -52,7 +52,7 @@ For fault-tolerance we adopt the "let it crash" model, which the telecom industr
 
 Proto.Actor is Open Source and available under the [Apache 2 License](http://www.apache.org/licenses/LICENSE-2.0) -- [explained in plain english here](https://www.tldrlegal.com/l/apache2).
 
-Download from https://github.com/AsynkronIT/Proto.Actor.
+Download from https://github.com/AsynkronIT/protoactor-go.
 
 ## A unique hybrid
 

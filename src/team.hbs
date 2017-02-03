@@ -7,11 +7,19 @@ active_selector: home
 
     <h2>Meet the <strong>Team</strong></h2>
 
+    <ul class="nav nav-pills sort-source" data-sort-id="team" data-option-key="filter">
+        <li data-option-value="*" class="active"><a href="#">Show All</a></li>
+        <li data-option-value=".dotnet"><a href="#">.NET</a></li>
+        <li data-option-value=".go"><a href="#">Go</a></li>
+    </ul>
+
+    <hr>
+
     <div class="row">
 
         <div class="sort-destination-loader sort-destination-loader-showing">
             <ul class="team-list sort-destination" data-sort-id="team">
-                <li class="col-md-3 col-sm-6 col-xs-12">
+                <li class="col-md-3 col-sm-6 col-xs-12 isotope-item dotnet go">
                     <span class="thumb-info thumb-info-hide-wrapper-bg mb-xlg">
                         <span class="thumb-info-wrapper">
                             <a href="about-me.html">
@@ -31,7 +39,7 @@ active_selector: home
                         </span>
                     </span>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12">
+                <li class="col-md-3 col-sm-6 col-xs-12 isotope-item dotnet">
                     <span class="thumb-info thumb-info-hide-wrapper-bg mb-xlg">
                         <span class="thumb-info-wrapper">
                             <a href="about-me.html">
@@ -51,7 +59,7 @@ active_selector: home
                         </span>
                     </span>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12">
+                <li class="col-md-3 col-sm-6 col-xs-12 isotope-item go">
                     <span class="thumb-info thumb-info-hide-wrapper-bg mb-xlg">
                         <span class="thumb-info-wrapper">
                             <a href="about-me.html">

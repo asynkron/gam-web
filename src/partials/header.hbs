@@ -38,6 +38,11 @@ active_selector: team
 												Team
 											</a>
 										</li>
+										<li class="{{#ifEq active_selector 'blog' }} active{{/ifEq}}">
+											<a href="/blog/index.html">
+												Blog
+											</a>
+										</li>
 										<li class="dropdown {{#ifEq page.layout 'docs.hbs' }} active{{/ifEq}}">
 											<a href="#">
 												Documentation <i class="fa fa-caret-down"></i>

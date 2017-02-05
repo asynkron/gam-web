@@ -1,6 +1,20 @@
-- name: Roger Alsing
-  title: Founder
+- name: Roger Johansson
+  title: Founder, Developer
   twitter: http://twitter.com/rogeralsing
   github: https://github.com/rogeralsing
-  github_user_num: 647031
+  profile_image: https://avatars1.githubusercontent.com/u/647031?v=3&s=400
+  description: abc
+
+- name: Christian Palmstierna
+  title: Developer
+  twitter: http://twitter.com/cpx86
+  github: https://github.com/cpx86
+  profile_image: https://avatars1.githubusercontent.com/u/209890?v=3&s=400
+  description: abc
+
+- name: Stuart Carnie
+  title: Developer
+  twitter: http://twitter.com/rogeralsing
+  github: https://github.com/rogeralsing
+  profile_image: https://avatars3.githubusercontent.com/u/52852?v=3&s=400
   description: abc

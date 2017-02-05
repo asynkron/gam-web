@@ -4,6 +4,7 @@
   github: https://github.com/rogeralsing
   profile_image: https://avatars1.githubusercontent.com/u/647031?v=3&s=400
   description: Creator of Proto.Actor and Akka.NET. Working on both the .NET and Go API.
+  platforms: go dotnet
 
 - name: Christian Palmstierna
   title: Developer
@@ -11,6 +12,7 @@
   github: https://github.com/cpx86
   profile_image: https://avatars1.githubusercontent.com/u/209890?v=3&s=400
   description: Core developer of the Proto.Actor .NET API.
+  platforms: dotnet
 
 - name: Stuart Carnie
   title: Developer
@@ -18,3 +20,4 @@
   github: https://github.com/stuartcarnie
   profile_image: https://avatars3.githubusercontent.com/u/52852?v=3&s=400
   description: Core developer of the Proto.Actor Go API.
+  platforms: go

@@ -1,5 +1,5 @@
 ---
-layout: docs.hbs
+layout: blog.hbs
 title: Hello Blog
 ---
 

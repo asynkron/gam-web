@@ -2,32 +2,40 @@
 layout: docs.hbs
 title: The Obligatory Hello World
 ---
-#  The Obligatory Hello World - DotNet
+#  The Obligatory Hello World
 This example shows how to define and consume actors in C#
 
-## Hello World using the Go API
+## Hello World using the C# API
 #### Define a message:
-```go
-//define a struct for our message
-type Hello struct{ Who string }
+```csharp
+class Hello
+{
+    public string Who;
+}
 ```
 
 #### Define your actor
-```go
-func (state *HelloActor) Receive(context actor.Context) {
-    switch msg := context.Message().(type) {
-    case Hello:
-        fmt.Printf("Hello %v\n", msg.Who)
+```csharp
+class HelloActor : IActor
+{
+    public Task ReceiveAsync(IContext context)
+    {
+        var msg = context.Message;
+        if (msg is Hello r)
+        {
+            Console.WriteLine($"Hello {r.Who}");
+        }
+        return Actor.Done;
     }
 }
 ```
 
 #### Usage:
-```go
-func main() {
-    props := actor.FromInstance(&HelloActor{})
-    pid := actor.Spawn(props)
-    pid.Tell(Hello{Who: "Roger"})
-    console.ReadLine()
-}
+```csharp
+var props = Actor.FromProducer(() => new HelloActor());
+var pid = Actor.Spawn(props);
+pid.Tell(new Hello
+{
+    Who = "Alex"
+});
 ```

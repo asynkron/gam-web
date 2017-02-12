@@ -24,10 +24,6 @@ var props = Actor.FromProducer(() => new MyActor()).WithMailbox(MyMailboxProduce
 
 ### Built-in Mailboxes
 
-The build in mailboxes differ between language implementations
-
-### CSharp Mailboxes
-
 * UnboundedMailbox
 
-  **This is the default mailbox** used by Proto.Actor. It's a non-blocking unbounded mailbox, and should be good enough for most cases.
+  This is the default mailbox used by Proto.Actor. It's a non-blocking unbounded mailbox, and should be good enough for most cases.

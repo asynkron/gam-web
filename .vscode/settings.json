@@ -7,5 +7,6 @@
     "src/wiki/*": "explorerExcludedFiles",
     "akka.net": "explorerExcludedFiles",
     ".sass-cache/": "explorerExcludedFiles"
-  }
+},
+"vsicons.presets.angular": false
 }

@@ -39,16 +39,16 @@ active_selector: blog
 					<article class="post post-large blog-single-post">
 
 						<div class="post-date">
-							<span class="day">10</span>
-							<span class="month">Jan</span>
+							<span class="day">{{day}}</span>
+							<span class="month">{{month}}</span>
 						</div>
 
-						<div class="post-content" id="main_content">
-
+						<div class="post-content" >
+							<div id="main_content">
 							{{#gfm }}
 							{{> body }}
 							{{/gfm }}
-
+							</div>
 							<div class="post-block post-share">
 								<h3 class="heading-primary"><i class="fa fa-share"></i>Share this post</h3>
 
@@ -59,21 +59,28 @@ active_selector: blog
 									<a class="addthis_button_pinterest_pinit"></a>
 									<a class="addthis_counter addthis_pill_style"></a>
 								</div>
-								<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>
+								<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a1f9df3626a076"></script>
 								<!-- AddThis Button END -->
 
 							</div>
 
+							{{#eachProperty team}}
+							{{#is key ../author}}
 							<div class="post-block post-author clearfix">
 								<h3 class="heading-primary"><i class="fa fa-user"></i>Author</h3>
 								<div class="img-thumbnail">
 									<a href="blog-post.html">
-										<img src="img/avatars/avatar.jpg" alt="">
+										<img src="{{value.profile_image}}" alt="">
 									</a>
 								</div>
-								<p><strong class="name"><a href="#">John Doe</a></strong></p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui. </p>
+								
+								
+								<p><strong class="name"><a href="#">{{value.name}}</a></strong></p>
+								<p>{{value.description}}</p>
+								
 							</div>
+							{{/is}}
+							{{/eachProperty}}
 						</div>
 					</article>
 

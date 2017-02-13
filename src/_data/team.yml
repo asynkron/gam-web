@@ -1,4 +1,5 @@
-- name: Roger Johansson
+rogeralsing:
+  name: Roger Johansson
   title: Founder, Developer
   twitter: http://twitter.com/rogeralsing
   github: https://github.com/rogeralsing
@@ -6,7 +7,8 @@
   description: Creator of Proto.Actor and Akka.NET. Working on both the .NET and Go API.
   platforms: go dotnet
 
-- name: Christian Palmstierna
+cpx86:
+  name: Christian Palmstierna
   title: Developer
   twitter: http://twitter.com/cpx86
   github: https://github.com/cpx86
@@ -14,7 +16,8 @@
   description: Core developer of the Proto.Actor .NET API.
   platforms: dotnet
 
-- name: Stuart Carnie
+stuartcarnie:
+  name: Stuart Carnie
   title: Developer
   twitter: http://twitter.com/stuartcarnie
   github: https://github.com/stuartcarnie

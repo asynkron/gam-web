@@ -1,15 +1,15 @@
 ---
 layout: blog.hbs
-title: Limit Concurrency
+title: Limit Concurrency using Routers
 year: 2017
 month: Feb
 day: 20
 author: rogeralsing
 ---
 
-# Limit Concurrency
+# Limit Concurrency using Routers
 
-In this post we will explore how we can use the actor model in Proto.Actor to limit concurrency.
+In this post we will explore how we can use the actor model and routers in Proto.Actor to limit concurrency.
 That is, we want to ensure that no more than X concurrent workers are working at the same time.
 This can be useful when working with some form of expensive or limited resource, or when you want to scale up and maximize CPU core utilization.
 
@@ -70,7 +70,7 @@ Now we can send messages asynchrounusly to our actor, and the actor can process 
 
 But what if we want to limit concurrency to any other number than 1?
 
-One approach would be to create a slice and then spawn multiple actors from the same props, and then manually round robin over those actors and send them each a message.
+One approach would be to create a slice and then spawn multiple actors from the same props, and then manually round-robin over those actors and send them each a message.
 This would result in x actors each pulling one message at a time from their own unique mailbox.
 There is however an easier way to do this.
 Proto.Actor has support for "Routers".

@@ -11,6 +11,7 @@ author: rogeralsing
 
 In this post we will explore how we can use the actor model in Proto.Actor to limit concurrency.
 That is, we want to ensure that no more than X concurrent workers are working at the same time.
+This can be useful when working with some form of expensive or limited resource, or when you want to scale up and maximize CPU core utilization.
 
 First, let's define a struct that will represent some form of work:
 ```go

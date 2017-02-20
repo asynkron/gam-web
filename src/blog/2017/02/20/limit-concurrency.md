@@ -9,14 +9,17 @@ author: rogeralsing
 
 # Limit Concurrency
 
-First, lets define a struct that will represent some form of work:
+In this post we will explore how we can use the actor model in Proto.Actor to limit concurrency.
+That is, we want to ensure that no more than X concurrent workers are working at the same time.
+
+First, let's define a struct that will represent some form of work:
 ```go
 type workItem struct{ i int }
 ```
 
 In this case, the work-item only carries an `int`, but this can of-course be replaced with something more meaningful.
 
-Now lets define our worker function, we do this by defining a function receiving an `actor.Context` object.
+Now let's define our worker function, we do this by defining a function receiving an `actor.Context` object.
 The Context in this case is the context of your actor. that is, it contains the current message, children, and other elements of the actor.
 
 ```go
@@ -28,7 +31,9 @@ func doWork(ctx actor.Context) {
 ```
 
 As seen above, we have to cast the current message into a `*workItem` pointer.
-This is because messages in Proto.Actor are of type `interface{}`, Go lacks generics and an actor can handle many different message types.
+Go lacks generics and an actor can handle many different message types, this is why messages in Proto.Actor are of type `interface{}`.
+(Proto.Actor also work with typed "Grains", more on that in another post)
+
 Once we have received a message of the correct type, we can now perform some sort of work.
 The type of work you want to perform can be anything, in this example we will settle for a simple log statement:
 
@@ -87,6 +92,7 @@ You can see how we replaced the previous `actor.FromFunc` with `router.NewRoundR
 This means that we now create a `Props` that will create a router with a round-robin strategy, and also spin up 5 workers, each using the `doWork` message handler.
 And this is it, now you can limit concurrency to a fixed number of workers, in our case `5`.
 And whatever work you send to the router PID, is now guaranteed to only execute at a maximum concurrency level of 5.
+
 
 
 

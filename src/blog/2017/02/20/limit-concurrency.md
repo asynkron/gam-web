@@ -13,6 +13,7 @@ In this post we will explore how we can use the actor model in Proto.Actor to li
 That is, we want to ensure that no more than X concurrent workers are working at the same time.
 This can be useful when working with some form of expensive or limited resource, or when you want to scale up and maximize CPU core utilization.
 
+
 First, let's define a struct that will represent some form of work:
 ```go
 type workItem struct{ i int }
@@ -46,6 +47,7 @@ func doWork(ctx actor.Context) {
 }
 ```
 
+## Creating an actor
 Now we need to create an actor and pass some work to this actor:
 
 ```go
@@ -65,6 +67,7 @@ The `actor.PID` returned by `Spawn` is an identifier for the actor, and can be u
 We do this by calling `pid.Tell(message)`.
 
 Now we can send messages asynchrounusly to our actor, and the actor can process the messages one by one.
+
 But what if we want to limit concurrency to any other number than 1?
 
 One approach would be to create a slice and then spawn multiple actors from the same props, and then manually round robin over those actors and send them each a message.
@@ -72,6 +75,8 @@ This would result in x actors each pulling one message at a time from their own 
 There is however an easier way to do this.
 Proto.Actor has support for "Routers".
 "Routers" are special actors that do exactly this.
+
+## Working with Routers
 
 What we want in this specific case is a *"Round-robin pool"*, that is, we want a pool of actors, where the workload is sent in a round-robin manner to the workers.
 We can do this by altering the above code to this:

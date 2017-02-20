@@ -99,8 +99,4 @@ This means that we now create a `Props` that will create a router with a round-r
 And this is it, now you can limit concurrency to a fixed number of workers, in our case `5`.
 And whatever work you send to the router PID, is now guaranteed to only execute at a maximum concurrency level of 5.
 
-
-
-
-
-
+There are of-course other strategies and use-cases for routers, but more on that in my next post.

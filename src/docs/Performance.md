@@ -5,11 +5,12 @@ title: Performance
 
 # Performance and Benchmarks
 
-| Lib              | Remote PingPong   | Inproc PingPong   | SkyNet              |
-| ---------------- | -----------------:| -----------------:| -------------------:|
-| Proto.Actor C#   | ~2.5 mil msg/sec  | ~90 mil msg/sec   | ~0.9 sec            |
-| Proto.Actor Go   | ~2.4 mil msg/sec  | ~120 mil msg/sec  | ~1.5 sec            |
-| Akka.NET         | ~50k msg/sec      | ~20 mil msg/sec   | ~15 sec             |
+| Lib                | Remote PingPong   | Inproc PingPong   | SkyNet              |
+| ------------------ | -----------------:| -----------------:| -------------------:|
+| Proto.Actor C#     | ~2.5 mil msg/sec  | ~90 mil msg/sec   | ~0.9 sec            |
+| Proto.Actor Go     | ~2.4 mil msg/sec  | ~120 mil msg/sec  | ~1.5 sec            |
+| Proto.Actor Python | ?                 | ?                 | ?                   |
+| Akka.NET           | ~50k msg/sec      | ~20 mil msg/sec   | ~15 sec             |
 
 ## Remote PingPong
 

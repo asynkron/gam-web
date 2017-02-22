@@ -128,7 +128,7 @@ illustrated in the following:
       6) Since there is no guaranteed delivery, any of the messages may be dropped, i.e. not arrive at `A2`
 
 >**Note**<br/>
-It is important to note that Akka's guarantee applies to the order in which
+It is important to note that Proto.Actor's guarantee applies to the order in which
 messages are enqueued into the recipient's mailbox. If the mailbox
 implementation does not respect FIFO order (e.g. a `PriorityMailbox`),
 then the order of processing by the actor can deviate from the enqueueing

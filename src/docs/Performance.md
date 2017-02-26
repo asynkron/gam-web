@@ -12,7 +12,7 @@ title: Performance
 | Akka.NET           | ~50k msg/sec      | ~20 mil msg/sec   | ~15 sec             |
 | Proto.Actor Python | ?                 | ?                 | ?                   |
 | Akka               | ?                 | ?                 | ?                   |
-| Erlang             | ?                 | ?                 | ?                   |
+| Erlang             | ?                 | ?                 | ~0.8 sec            |
 
 ## Remote PingPong
 

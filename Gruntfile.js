@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         open : {
           dev : {
-            path: 'http://127.0.0.1:8080/'
+            path: 'http://127.0.0.1:9001/'
           }
         },
         'livereload' : {
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
         'http-server': {
             'dev': {
                 root: "web",
-                port: 8080,
+                port: 9001,
                 host: "0.0.0.0",
                 cache: 0,
                 showDir : true,

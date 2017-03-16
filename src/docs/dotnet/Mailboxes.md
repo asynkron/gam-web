@@ -29,8 +29,6 @@ var props = Actor.FromProducer(() => new MyActor())
 
 Mailbox statistics provides an extension point to get notifications of the following mailbox events: MailboxStarted, MailboxEmpty, MessagePosted, MessageReceived.
 
-### Usage
-
 ```csharp
 var props = Actor.FromProducer(() => new MyActor())
     .WithMailbox(() => UnboundedMailbox.Create(myMailboxStatistics1, myMailboxStatistics2));

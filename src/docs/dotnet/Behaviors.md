@@ -1,9 +1,9 @@
 ---
 layout: docs.hbs
-title: Switchable Behaviors
+title: Behaviors
 ---
 
-# Switchable Behaviors
+# Behaviors
 
 Actors have the power to switch their behaviors at any point in time. This is usually referred as *becoming something*, as in *the actor becomes busy* or *the actor becomes connected*.
 

@@ -5,25 +5,33 @@ title: Mailboxes
 
 # Mailboxes
 
-## What Mailboxes Do?
+In Proto.Actor, Mailboxes hold messages that are destined for an actor. When you send a message to an actor, the message doesn't go directly to the actor, but goes to the actor's mailbox until the actor gets time to process it.
 
-In Proto.Actor, Mailboxes hold messages that are destined for an actor. When you send a message to an actor, the message doesn't go directly to the actor, but goes to the actor's mailbox until the actor has time to process it.
+The default mailbox consists of two queues of messages: system messages and user messages. The system messages are used internally by the Actor Context to suspend and resume mailbox processing in case of failure. System messages are also used by internally to manage the Actor, e.g. starting, stopping and restarting it. User messages are sent to the actual Actor.
 
-A mailbox can be described as a queue of messages. Messages are usually then delivered from the mailbox to the actor one at a time in the order they were received, but there are implementations like the [Priority Mailbox](#unboundedprioritymailbox) that can change the order of delivery.
+Messages in the mailbox will always be delivered in FIFO order, with one exception: if there are any system messages they will always be processed before any user messages.
 
-### Using a Mailbox
+## Changing the mailbox
 
-To make an actor use a specific mailbox, you can set it up the following way:
+To use a specific mailbox implementation, you can customize the Props:
 
-1. In the actor's props
-
-## CSharp
-```cs
-var props = Actor.FromProducer(() => new MyActor()).WithMailbox(MyMailboxProducer);
+```csharp
+var props = Actor.FromProducer(() => new MyActor())
+    .WithMailbox(() => UnboundedMailbox.Create());
 ```
 
-### Built-in Mailboxes
+#### Built-in mailboxes
 
-* UnboundedMailbox
-
+* **UnboundedMailbox**  
   This is the default mailbox used by Proto.Actor. It's a non-blocking unbounded mailbox, and should be good enough for most cases.
+
+## Mailbox statistics
+
+Mailbox statistics provides an extension point to get notifications of the following mailbox events: MailboxStarted, MailboxEmpty, MessagePosted, MessageReceived.
+
+### Usage
+
+```csharp
+var props = Actor.FromProducer(() => new MyActor())
+    .WithMailbox(() => UnboundedMailbox.Create(myMailboxStatistics1, myMailboxStatistics2));
+```

@@ -15,19 +15,19 @@ $(function() {
 
 	
 
-	var main = $("#main_content");
+	// var main = $("#main_content");
 
-	$.get( "/pages.html", function( data ) {
-		var files = JSON.parse( data ).pages;
-		console.info(files);
-		var codes = main.find("code").filter(function() {
-			return $.inArray($(this).text(), files) != -1;
-		});
-		codes.replaceWith(function() {
-		    var file = $.trim($(this).text());
-		    return '<code><a href="/docs/' + file + '" >^' + file + '</a></code>';
-		});
-	});
+	// $.get( "/pages.html", function( data ) {
+	// 	var files = JSON.parse( data ).pages;
+	// 	console.info(files);
+	// 	var codes = main.find("code").filter(function() {
+	// 		return $.inArray($(this).text(), files) != -1;
+	// 	});
+	// 	codes.replaceWith(function() {
+	// 	    var file = $.trim($(this).text());
+	// 	    return '<code><a href="/docs/' + file + '" >^' + file + '</a></code>';
+	// 	});
+	// });
 });
 
 

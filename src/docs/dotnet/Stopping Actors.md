@@ -1,10 +1,10 @@
 ---
 layout: docs.hbs
-title: Stopping Akka.NET Actors
+title: Stopping Actors
 ---
-# Stopping Akka.NET Actors
+# Stopping Actors
 
-*Quoted from [How to Stop an Actor... the Right Way](https://petabridge.com/blog/how-to-stop-an-actor-akkadotnet/)*
+<!--*Quoted from [How to Stop an Actor... the Right Way](https://petabridge.com/blog/how-to-stop-an-actor-akkadotnet/)*
 
 
 ## Ways to Stop An Actor
@@ -107,4 +107,4 @@ var shutdown = targetActorRef.GracefulStop(TimeSpan.FromSeconds(5));
 ```
 
 ### Related Documentation
-- [Working With Actors - Stopping an Actor](../Working with actors#stopping-actors)
+- [Working With Actors - Stopping an Actor](../Working with actors#stopping-actors)-->

@@ -21,7 +21,7 @@ title: Go Documentation
 - [Handling Lifecycle Events](Lifecycle Events)
 
 ## Remoting
-- [Remoting](Remoting)
+- [Remote](Remote)
 
 ## Cluster
 - [Cluster](Cluster)

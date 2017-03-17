@@ -2,9 +2,9 @@
 layout: docs.hbs
 title: Cluster
 ---
-# GAM Cluster
+# Cluster
 
-## Virtual Actors
+<!--## Virtual Actors
 
 ## Protobuf IDL Definition
 
@@ -73,4 +73,4 @@ func init() {
 	//apply DI and setup logic
 	HelloFactory(func() Hello { return &hello{} })
 }
-```
+```-->

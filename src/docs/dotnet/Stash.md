@@ -1,9 +1,9 @@
 ---
 layout: docs.hbs
-title: Stashing Messages
+title: Stash
 ---
 
-## Stashing Messages
+<!--## Stashing Messages
 
 ### What is the Stash?
 
@@ -112,4 +112,4 @@ There are some APIs on IStash that are considered **internal** but are exposed p
 
   Clears the stash returning all messages that will be discarded.
 
-> **Note:** The internal API may change without notice, but are part of Akka 1.0.
+> **Note:** The internal API may change without notice, but are part of Akka 1.0.-->

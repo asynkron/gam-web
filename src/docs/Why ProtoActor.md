@@ -10,7 +10,7 @@ Proto.Actor provides scalable, real-time transaction processing.
 Proto.Actor is a unified runtime and programming model for:
 
 * Scale up (Concurrency)
-* Scale out (Remoting)
+* Scale out (Remote)
 * Fault tolerance
 
 With one thing to learn and admin, with high cohesion and coherent semantics.

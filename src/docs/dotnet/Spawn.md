@@ -26,8 +26,3 @@ public Task ReceiveAsync(IContext context)
     var pid3 = context.SpawnNamed(props, "my-actor");
 }
 ```
-
-# PIDs and actors
-
-When you spawn an actor you don't get a direct reference to it. Instead you get a `PID` (short for process ID) which is a serializable identifier that is used to send messages to the actor's mailbox. A benefit of this is that the `PID` can easily and cheaply be serialized and sent over the wire, allowing for actors to communicate remotely.
-

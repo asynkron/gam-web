@@ -20,8 +20,8 @@ title: .NET Documentation
 - [EventStream](EventStream)
 - [Behaviors](Behaviors)
 - [Middleware](Middleware)
+- [Actor Lifecycle](Lifecycle)
 - [Handling DeadLetter](DeadLetter)
-- [Handling Lifecycle Events](Lifecycle Events)
 
 ## Remoting
 - [Remote](Remote)

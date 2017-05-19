@@ -24,3 +24,30 @@ stuartcarnie:
   profile_image: https://avatars3.githubusercontent.com/u/52852?v=3&s=400
   description: Core developer of the Proto.Actor Go API.
   platforms: go
+
+adamhathcock:
+  name: Adam Hathcock
+  title: Developer
+  twitter: http://twitter.com/adamhathcock
+  github: https://github.com/adamhathcock
+  profile_image: https://avatars3.githubusercontent.com/u/527620?v=3&s=400
+  description: Core developer of the Proto.Actor .NET API.
+  platforms: dotnet
+
+raskolnikoov:
+  name: Daniel Söderberg
+  title: Developer
+  twitter: 
+  github: https://github.com/raskolnikoov
+  profile_image: https://avatars3.githubusercontent.com/u/5316125?v=3&s=400
+  description: Core developer of the Proto.Actor .NET API.
+  platforms: dotnet
+
+tomliversidge:
+  name: Tom Liversidge
+  title: Developer
+  twitter: https://twitter.com/tomliversidge
+  github: https://github.com/tomliversidge
+  profile_image: https://avatars3.githubusercontent.com/u/1437372?v=3&s=400
+  description: Core developer of the Proto.Actor .NET API.
+  platforms: dotnet

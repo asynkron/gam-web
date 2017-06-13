@@ -35,8 +35,8 @@ var props = new Props()
     .WithDispatcher(new ThreadPoolDispatcher { Throughput = 300 }) 
     // the default mailbox uses unbounded queues
     .WithMailbox(() => UnboundedMailbox.Create()) 
-    // the default strategy restarts the actor a maximum of 10 times within a 10 second window
-    .WithSupervisor(new OneForOneStrategy((who, reason) => SupervisorDirective.Restart, 10, TimeSpan.FromSeconds(10)))
+    // the default strategy restarts child actors a maximum of 10 times within a 10 second window
+    .WithChildSupervisorStrategy(new OneForOneStrategy((who, reason) => SupervisorDirective.Restart, 10, TimeSpan.FromSeconds(10)))
     // middlewares can be chained to intercept incoming and outgoing messages
     // receive middlewares are invoked before the actor receives the message
     // sender middlewares are invoked before the message is sent to the target PID

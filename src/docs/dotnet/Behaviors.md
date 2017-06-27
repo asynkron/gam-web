@@ -5,7 +5,7 @@ title: Behaviors
 
 # Behaviors
 
-Actors can change their behavior at any time. This is achieved through the Behavior plugin included with the core Proto.Actor library. We're going to use the example of modelling a light bulb to demonstrate this: 
+Actors can change their behavior at any time. This is achieved through the Behavior class included with the core Proto.Actor library. We're going to use the example of modelling a light bulb to demonstrate this: 
 
 ```csharp
 public class LightBulb : IActor
@@ -14,7 +14,7 @@ public class LightBulb : IActor
 
     public LightBulb()
     {
-        _behavior = new Behavior(); // use Behavior plugin
+        _behavior = new Behavior();
     }
 }
 ```
@@ -47,7 +47,7 @@ public class LightBulb : IActor
 
     public LightBulb()
     {
-        _behavior = new Behavior(); // use Behavior plugin
+        _behavior = new Behavior();
         _behavior.Become(Off)
     }
 }

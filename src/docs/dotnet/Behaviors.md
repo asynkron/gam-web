@@ -36,7 +36,7 @@ There are three methods available for changing behaviors:
 * `BecomeStacked` pushes the passed `Receive` method onto the behavior stack, but preserves the previous behavior.
 * `UnbecomeStacked` reverts to the previously used behavior.
 
-### Example: Become behavior
+### Become
 
 When we initialise the LightBulb, we can set the initial state of the light to off:
 
@@ -92,7 +92,7 @@ private Task On(IContext context)
 }
 ```
 
-## Global Message Handling
+### Global Message Handling
 
 Sometimes you want certain messages to be treated the same way regardless of what your current behavior is. Consider what would happen were you to hit the light bulb with a hammer - it would smash, regardless of it being On or Off. This can be accomplished by handling these message types _before_ delagating to the Behavior class:
 
@@ -135,19 +135,19 @@ private Task Smashed(IContext context)
 }
 ```
 
-### Example: Push/pop behavior
+### BecomeStacked / UnbecomeStacked
 
-This example shows how to push and pop behaviors. When the actor pops the behavior in `Receive2` it reverts back to `Receive`.
+This example shows how to use the `BecomeStacked` and `UnbecomeStacked` methods. When the actor calls `UnbecomeStacked` in `Receive2` it reverts back to `Receive`.
 
 ```csharp
-public Task Receive(IContext ctx)
+public Task Receive(IContext context)
 {
-    ctx.BecomeStacked(Receive2);
+    _behavior.BecomeStacked(Receive2);
 }
 
-public Task Receive2(IContext ctx)
+public Task Receive2(IContext context)
 {
-    ctx.UnbecomeStacked(); // behavior will revert back to Receive
+    _behavior.UnbecomeStacked(); // behavior will revert back to Receive
 }
 ```
 

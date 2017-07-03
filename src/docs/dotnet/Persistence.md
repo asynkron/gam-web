@@ -3,11 +3,11 @@ layout: docs.hbs
 title: Persistence
 ---
 
-#Persistence
+# Persistence
 
 You can choose to have actors persist their state by using the `Proto.Persistence` module. The Persistence plug-in allows an actor to recover it’s state when it is restarted or reloaded through the use of event sourcing and/or snapshotting. 
 
-##Event Sourcing
+## Event Sourcing
 
 When using event sourcing, each state change is modelled as an event that is applied to the actor both during the recovery phase and when running live. The Persistence plugin takes an `Action<Event> applyEvent` method as a parameter that is called whenever an event is saved, or loaded from the underlying storage during recovery. It is important that all state changes are defined in this `ApplyEvent` method, including transitioning to different behaviors. 
 
@@ -15,13 +15,13 @@ When using event sourcing, each state change is modelled as an event that is app
 
 
 
-###Example
+### Example
 
 We're going to implement a simple counter actor using the `Persistence` class. This counter will support a single message type, `Add` that has an amount to add:
 
 ```csharp
 public class Add {
-	public int Amount { get; set; }
+    public int Amount { get; set; }
 }
 
 ```
@@ -79,7 +79,7 @@ private void ApplyEvent(Event @event)
 ```
 It is inside the `ApplyEvent` method that any state changes for the actor occur - here we simply add the amount from the `Added` message to our current value.
 
-##Snapshotting
+## Snapshotting
 
 The `Persistence` module also supports the concept of snapshotting, _both with and without event sourcing_. When used without event sourcing, this is the equivalent of only ever saving the _current_ state of the actor, i.e. no audit log of changes is kept.   
 
@@ -125,6 +125,10 @@ internal class Counter : IActor
 
 Here we are using the static `WithSnapshotting` method to create the `Persistence` class, once again passing in a `provider` and `actorId` but this time a `ApplySnapshot` method that will be called when `RecoverStateAsync` is called when the actor is started.
 
-##Event Sourcing and Snapshotting
+## Event Sourcing and Snapshotting
 
 We can use both event sourcing and snapshotting together. When used in this manner, snapshotting becomes a performance optimisation for cases when you have large numbers of events to replay to rebuild the state of your actor. The basic idea is that for every N events you save, you take a snapshot of the current state of the actor. When `RecoverStateAsync` is called, if there are any snapshots saved, then the most recent one will be loaded along with any events that occured _after_ the snapshot was taken. The `Persistence` plugin manages this tracking internally through the use of an index that is incremented for each saved event. Any time a snapshot is taken, it is tied to index of the actor at that time. 
+
+### Snapshot strategies
+
+

@@ -76,19 +76,31 @@ module.exports = function(grunt) {
         clean: {
             all: ['web/*.html']
         },
-
+        
         assemble: {
             options: {
+                collections: [{
+                        name: 'post',
+                        sortby: 'posted',
+                        sortorder: 'descending'
+                        }],                
                 layout: "docs.hbs",
                 flatten: false,
                 expand: true,
                 layoutdir: layouts,
                 partials: ['src/partials/**/*'],
-                helpers: ['helper-gfm.js', 'helper-ifEq.js','helper-moment'],
+                helpers: ['helper-gfm.js', 'helper-ifEq.js','helper-moment', 'src/helpers/helpers.js'],
                 assets: assets,
                 data: 'src/_data/*'
             },
-
+            
+blog: {
+    options: {
+      layout: 'blog.hbs'
+    },
+    src: ['src/blog/**/*.md'],
+    dest: output
+  },
             "pages": { //build all pages, hbs and markdown
                 files: [
                     {

@@ -9,7 +9,7 @@ active_selector: blog
 				<div class="col-md-12">
 					<ul class="breadcrumb">
 						<li><a href="/index.html">Home</a></li>
-						<li><a href="/blog/index.html">Docs</a></li>
+						<li><a href="/blog/index.html">Blog</a></li>
 						<li class="active">{{basename}}</li>
 					</ul>
 				</div>
@@ -29,13 +29,19 @@ active_selector: blog
 
 					<h4 class="heading-primary">Topics</h4>
 					<div id="toc">
+						<ul>
+  {{#withSort post 'data.posted'}}
+    {{#each this.pages }}
+<li><a href="{{ replaceStr this.dest 'web' '' }}">{{ this.data.title }}</a></li>
+				    
+    {{/each}}
+  {{/withSort}}
+</ul>
 					</div>
 				</aside>
 			</div>
 			<div class="col-md-9" id="main_content">
-				{{#gfm }}
-				{{> body }}
-				{{/gfm }}
+				
 			</div>
 
 		</div>

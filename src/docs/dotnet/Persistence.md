@@ -11,10 +11,6 @@ You can choose to have actors persist their state by using the `Proto.Persistenc
 
 When using event sourcing, each state change is modelled as an event that is applied to the actor both during the recovery phase and when running live. The Persistence plugin takes an `Action<Event> applyEvent` method as a parameter that is called whenever an event is saved, or loaded from the underlying storage during recovery. It is important that all state changes are defined in this `ApplyEvent` method, including transitioning to different behaviors. 
 
-
-
-
-
 ### Example
 
 We're going to implement a simple counter actor using the `Persistence` class. This counter will support a single message type, `Add` that has an amount to add:
@@ -130,5 +126,15 @@ Here we are using the static `WithSnapshotting` method to create the `Persistenc
 We can use both event sourcing and snapshotting together. When used in this manner, snapshotting becomes a performance optimisation for cases when you have large numbers of events to replay to rebuild the state of your actor. The basic idea is that for every N events you save, you take a snapshot of the current state of the actor. When `RecoverStateAsync` is called, if there are any snapshots saved, then the most recent one will be loaded along with any events that occured _after_ the snapshot was taken. The `Persistence` plugin manages this tracking internally through the use of an index that is incremented for each saved event. Any time a snapshot is taken, it is tied to index of the actor at that time. 
 
 ### Snapshot strategies
+
+When used in conjunction with event sourcing, you can optionally specify an `ISnapshotStrategy` to auto-save snapshots when saving an event. The provided strategies are:
+
+* `EventTypeStrategy` - saves a snapshot based on the type of event saved
+* `IntervalStrategy` - saves a snapshot at a regular interval based on the number of events saved, i.e. every 100 events
+* `TimeStrategy` - saves a snapshot at a regular interval based on time, i.e. wait at least 6 hours between snapshots
+
+On saving an event, the `Persistence` module will save a snapshot if the `ShouldTakeSnapshot` method of the `ISnapshotStrategy` returns true. 
+
+
 
 

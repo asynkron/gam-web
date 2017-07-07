@@ -5,7 +5,11 @@ title: Persistence
 
 # Persistence
 
-You can choose to have actors persist their state by using the `Proto.Persistence` module. The Persistence plug-in allows an actor to recover it’s state when it is restarted or reloaded through the use of event sourcing and/or snapshotting. 
+You can choose to have actors persist their state by using the `Proto.Persistence` module. The Persistence plug-in allows an actor to recover it’s state when it is started and supports three modes of operation:
+
+- Event Sourcing 
+- Snapshotting
+- Event Sourcing with Snapshotting
 
 ## Event Sourcing
 
@@ -77,7 +81,7 @@ It is inside the `ApplyEvent` method that any state changes for the actor occur 
 
 ## Snapshotting
 
-The `Persistence` module also supports the concept of snapshotting, _both with and without event sourcing_. When used without event sourcing, this is the equivalent of only ever saving the _current_ state of the actor, i.e. no audit log of changes is kept.   
+When configured to just use snapshotting, this is the equivalent of only ever saving the _current_ state of the actor, i.e. no audit log of changes is kept.   
 
 We can rewrite the Counter example above to only use snapshotting:
 
@@ -127,7 +131,7 @@ We can use both event sourcing and snapshotting together. When used in this mann
 
 ### Snapshot strategies
 
-When used in conjunction with event sourcing, you can optionally specify an `ISnapshotStrategy` to auto-save snapshots when saving an event. The provided strategies are:
+You can optionally specify an `ISnapshotStrategy` to auto-save snapshots when saving an event. The provided strategies are:
 
 * `EventTypeStrategy` - saves a snapshot based on the type of event saved
 * `IntervalStrategy` - saves a snapshot at a regular interval based on the number of events saved, i.e. every 100 events

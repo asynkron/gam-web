@@ -129,6 +129,65 @@ Here we are using the static `WithSnapshotting` method to create the `Persistenc
 
 We can use both event sourcing and snapshotting together. When used in this manner, snapshotting becomes a performance optimisation for cases when you have large numbers of events to replay to rebuild the state of your actor. The basic idea is that for every N events you save, you take a snapshot of the current state of the actor. When `RecoverStateAsync` is called, if there are any snapshots saved, then the most recent one will be loaded along with any events that occured _after_ the snapshot was taken. The `Persistence` plugin manages this tracking internally through the use of an index that is incremented for each saved event. Any time a snapshot is taken, it is tied to index of the actor at that time. 
 
+We can rewrite the Counter example above to only use event sourcing with snapshotting:
+
+```csharp
+internal class Counter : IActor
+{
+    private int _value;
+    private readonly Persistence _persistence;
+
+    public Counter(IProvider provider, string actorId)
+    {
+        _persistence = Persistence.WithEventSourcingAndSnapshotting(provider, actorId, ApplyEvent, ApplySnapshot);
+    }
+
+    private void ApplyEvent(Event @event)
+    {
+        switch (@event.Data)
+        {
+            case Added msg:
+                _value = _value + msg.Amount;
+                break;
+        }
+    }
+    private void ApplySnapshot(Snapshot snapshot)
+    {
+        if (snapshot.State is int ss)
+        {
+            _value = ss;
+        }
+    }
+
+    public async Task ReceiveAsync(IContext context)
+    {
+        switch (context.Message)
+        {
+            case Started _:
+                await _persistence.RecoverStateAsync();
+                break;
+            case Add msg:
+            	if (msg.Amount > 0)
+            	{
+                	await _persistence.PersistEventAsync(new Added { Amount = msg.Amount });
+                    if (ShouldTakeSnapshot()) 
+                    {
+                        await _persistence.PersistSnapshotAsync(_value);
+                    }
+                }
+                break;
+        }
+    }
+    
+    private bool ShouldTakeSnapshot()
+    {
+        // some logic to determine whether to take a snapshot or not
+    }
+}
+```
+
+Now when the Counter actor is started, any snapshots that have been saved will be applied before any remaining events.
+
 ### Snapshot strategies
 
 You can optionally specify an `ISnapshotStrategy` to auto-save snapshots when saving an event. The provided strategies are:
@@ -139,6 +198,37 @@ You can optionally specify an `ISnapshotStrategy` to auto-save snapshots when sa
 
 On saving an event, the `Persistence` module will save a snapshot if the `ShouldTakeSnapshot` method of the `ISnapshotStrategy` returns true. 
 
+```csharp
+internal class Counter : IActor
+{
+    private int _value;
+    private readonly Persistence _persistence;
 
+    public Counter(IProvider provider, string actorId)
+    {
+        _persistence = Persistence.WithEventSourcingAndSnapshotting(provider, actorId, ApplyEvent, ApplySnapshot, new IntervalStrategy(10), () => _value);
+    }
+
+    // ApplyEvent() and ApplySnapshot() unchanged
+    
+    public async Task ReceiveAsync(IContext context)
+    {
+        switch (context.Message)
+        {
+            case Started _:
+                await _persistence.RecoverStateAsync();
+                break;
+            case Add msg:
+            	if (msg.Amount > 0)
+            	{
+                	await _persistence.PersistEventAsync(new Added { Amount = msg.Amount });
+                }
+                break;
+        }
+    }
+}
+```
+
+Here we pass in a strategy saying to save a snapshot every 10 events. Note we have removed the manual saving of snapshots, as this is now taken care of internally through the use of the snapshot strategy
 
 

@@ -169,7 +169,7 @@ internal class Counter : IActor
             case Add msg:
             	if (msg.Amount > 0)
             	{
-                	await _persistence.PersistEventAsync(new Added { Amount = msg.Amount });
+                    await _persistence.PersistEventAsync(new Added { Amount = msg.Amount });
                     if (ShouldTakeSnapshot()) 
                     {
                         await _persistence.PersistSnapshotAsync(_value);
@@ -221,7 +221,7 @@ internal class Counter : IActor
             case Add msg:
             	if (msg.Amount > 0)
             	{
-                	await _persistence.PersistEventAsync(new Added { Amount = msg.Amount });
+                    await _persistence.PersistEventAsync(new Added { Amount = msg.Amount });
                 }
                 break;
         }

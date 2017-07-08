@@ -5,7 +5,7 @@ title: Persistence
 
 # Persistence
 
-You can choose to have actors persist their state by using the `Proto.Persistence` module. The Persistence plug-in allows an actor to recover it’s state when it is started and supports three modes of operation:
+You can choose to have actors persist their state by using the `Proto.Persistence` module. This allows an actor to recover it’s state when it is started and supports three modes of operation:
 
 - Event Sourcing 
 - Snapshotting
@@ -42,7 +42,7 @@ public class Counter : IActor
 }
 ``` 
 
-Here we use the static `WithEventSourcing` method to create our instance of the `Persistence` class, passing in a `provider`, `actorId` and `ApplyEvent` method. We'll get to the `ApplyEvent` method below, but for now know that you pass in an implementation of IProvider, which represents the underlying storage system used to support persistence and an `actorId` that should be a unique identifier for the actor. 
+Here we use the static `WithEventSourcing` method to create our instance of the `Persistence` class, passing in a `provider`, `actorId` and `ApplyEvent` method. We'll get to the `ApplyEvent` method below, but for now know that you pass in an implementation of `IProvider`, which represents the underlying storage system used to support persistence and an `actorId` that should be a unique identifier for the actor. 
 
 Our `Counter` actor only supports two messages:
 
@@ -64,7 +64,7 @@ public async Task ReceiveAsync(IContext context)
 }
 ```
 
-When the actor is started, we recover the state. This will load all saved events from the underlying storage and call the `ApplyEvent` method for each. When we receive an `Add` message, we first run some business logic, then save an `Added` event. `PersistEventAsync` saves the event to the underlying storage and calls the `ApplyEvent` method:
+When `Started`, we call `RecoverStateAsync` to recover the state. This will load all saved events from the underlying storage and call the `ApplyEvent` method for each. When we receive an `Add` message, we first run some business logic, then save an `Added` event. `PersistEventAsync` saves the event to the underlying storage and calls the `ApplyEvent` method:
 
 ```csharp
 private void ApplyEvent(Event @event)
@@ -83,7 +83,7 @@ It is inside the `ApplyEvent` method that any state changes for the actor occur 
 
 When configured to just use snapshotting, this is the equivalent of only ever saving the _current_ state of the actor, i.e. no audit log of changes is kept.   
 
-We can rewrite the Counter example above to only use snapshotting:
+We can rewrite the `Counter` example above to only use snapshotting:
 
 ```csharp
 internal class Counter : IActor
@@ -127,9 +127,9 @@ Here we are using the static `WithSnapshotting` method to create the `Persistenc
 
 ## Event Sourcing and Snapshotting
 
-We can use both event sourcing and snapshotting together. When used in this manner, snapshotting becomes a performance optimisation for cases when you have large numbers of events to replay to rebuild the state of your actor. The basic idea is that for every N events you save, you take a snapshot of the current state of the actor. When `RecoverStateAsync` is called, if there are any snapshots saved, then the most recent one will be loaded along with any events that occured _after_ the snapshot was taken. The `Persistence` plugin manages this tracking internally through the use of an index that is incremented for each saved event. Any time a snapshot is taken, it is tied to index of the actor at that time. 
+We can use both event sourcing and snapshotting together. When used in this manner, snapshotting becomes a performance optimisation for cases when you have large numbers of events to replay to rebuild the state of your actor. When `RecoverStateAsync` is called, if there are any snapshots saved, then the most recent one will be loaded along with any events that occured _after_ the snapshot was taken. The `Persistence` plugin manages this tracking internally through the use of an index that is incremented for each saved event. Any time a snapshot is taken, it is tied to index of the actor at that time. 
 
-We can rewrite the Counter example above to only use event sourcing with snapshotting:
+We can rewrite the `Counter` example above to use event sourcing with snapshotting:
 
 ```csharp
 internal class Counter : IActor
@@ -186,7 +186,7 @@ internal class Counter : IActor
 }
 ```
 
-Now when the Counter actor is started, any snapshots that have been saved will be applied before any remaining events.
+Now when the `Counter` actor is started, any snapshots that have been saved will be applied before any remaining events.
 
 ### Snapshot strategies
 

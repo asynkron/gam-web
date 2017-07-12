@@ -34,15 +34,15 @@ public class Counter : IActor
     private int _value = 0;
     private readonly Persistence _persistence;
 
-    public Counter(IProvider provider, string actorId)
+    public Counter(IEventStore eventStore, string actorId)
     {
-        _persistence = Persistence.WithEventSourcing(provider, actorId, ApplyEvent);
+        _persistence = Persistence.WithEventSourcing(eventStore, actorId, ApplyEvent);
     }
     //...
 }
 ``` 
 
-Here we use the static `WithEventSourcing` method to create our instance of the `Persistence` class, passing in a `provider`, `actorId` and `ApplyEvent` method. We'll get to the `ApplyEvent` method below, but for now know that you pass in an implementation of `IProvider`, which represents the underlying storage system used to support persistence and an `actorId` that should be a unique identifier for the actor. 
+Here we use the static `WithEventSourcing` method to create our instance of the `Persistence` class, passing in a `eventStore`, `actorId` and `ApplyEvent` method. We'll get to the `ApplyEvent` method below, but for now know that you pass in an implementation of `IEventStore`, which represents the underlying storage system used to support persistence and an `actorId` that should be a unique identifier for the actor. 
 
 Our `Counter` actor only supports two messages:
 
@@ -91,9 +91,9 @@ internal class Counter : IActor
     private int _value;
     private readonly Persistence _persistence;
 
-    public Counter(IProvider provider, string actorId)
+    public Counter(ISnapshotStore snapshotStore, string actorId)
     {
-        _persistence = Persistence.WithSnapshotting(provider, actorId, ApplySnapshot);
+        _persistence = Persistence.WithSnapshotting(snapshotStore, actorId, ApplySnapshot);
     }
 
     private void ApplySnapshot(Snapshot snapshot)
@@ -123,7 +123,7 @@ internal class Counter : IActor
 }
 ```
 
-Here we are using the static `WithSnapshotting` method to create the `Persistence` class, once again passing in a `provider` and `actorId` but this time a `ApplySnapshot` method that will be called when `RecoverStateAsync` is called when the actor is started.
+Here we are using the static `WithSnapshotting` method to create the `Persistence` class, passing in a `snapshotStore` and `actorId` but this time a `ApplySnapshot` method that will be called when `RecoverStateAsync` is called when the actor is started.
 
 ## Event Sourcing and Snapshotting
 
@@ -137,9 +137,9 @@ internal class Counter : IActor
     private int _value;
     private readonly Persistence _persistence;
 
-    public Counter(IProvider provider, string actorId)
+    public Counter(IEventStore eventStore, ISnapshotStore snapshotStore, string actorId)
     {
-        _persistence = Persistence.WithEventSourcingAndSnapshotting(provider, actorId, ApplyEvent, ApplySnapshot);
+        _persistence = Persistence.WithEventSourcingAndSnapshotting(eventStore, snapshotStore, actorId, ApplyEvent, ApplySnapshot);
     }
 
     private void ApplyEvent(Event @event)
@@ -204,9 +204,10 @@ internal class Counter : IActor
     private int _value;
     private readonly Persistence _persistence;
 
+    // note that here we are using IProvider, which implements IEventStore and ISnapshotStore in cases where you prefer to pass in a single parameter to your actor that represents the storage system being used for both
     public Counter(IProvider provider, string actorId)
     {
-        _persistence = Persistence.WithEventSourcingAndSnapshotting(provider, actorId, ApplyEvent, ApplySnapshot, new IntervalStrategy(10), () => _value);
+        _persistence = Persistence.WithEventSourcingAndSnapshotting(provider, provider, actorId, ApplyEvent, ApplySnapshot, new IntervalStrategy(10), () => _value);
     }
 
     // ApplyEvent() and ApplySnapshot() unchanged
@@ -230,5 +231,4 @@ internal class Counter : IActor
 ```
 
 Here we pass in a strategy saying to save a snapshot every 10 events. Note we have removed the manual saving of snapshots, as this is now taken care of internally through the use of the snapshot strategy
-
 

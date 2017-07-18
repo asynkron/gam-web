@@ -7,9 +7,9 @@ title: Performance
 
 | Lib                | Remote PingPong    | Inproc PingPong      | SkyNet              |
 | ------------------ | ------------------:| --------------------:| -------------------:|
+| Proto.Actor Kotlin | ~2 300 000 msg/sec | ~200 000 000 msg/sec | ~0.6 sec            |
 | Proto.Actor C#     | ~2 500 000 msg/sec | ~90 000 000 msg/sec  | ~0.8 sec            |
 | Proto.Actor Go     | ~2 400 000 msg/sec | ~120 000 000 msg/sec | ~1.5 sec            |
-| Proto.Actor Kotlin | ~2 300 000 msg/sec | ~200 000 000 msg/sec | ~1.2 sec            |
 | Akka.NET           | ~38 000 msg/sec    | ~20 000 000 msg/sec  | ~12 sec             |
 | Proto.Actor Python | ?                  | ?                    | ?                   |
 | Akka               | ?                  | ?                    | ?                   |

@@ -42,7 +42,7 @@ Here's a simple example:
 
 ```csharp
 using System;
-using Akka.Actor;
+using Proto;
 
 
 /* message definition */
@@ -59,17 +59,25 @@ public class MyMessage
 public class Hi{}
 
 /* actor definition */
-public class MyActor : ReceiveActor
+public class MyActor : IActor
 {
     string lastActorName;
 
-    public MyActor()
+    public Task ReceiveAsync(Context context)
     {
-        Receive<MyMessage>(msg =>
+        switch(context.Message)
         {
-            lastActorName = msg.Name;
-        });
-        Receive<Hi>(hi => Console.WriteLine("Hi {0}!",lastActorName));
+            case MyMessage msg:
+            {
+                lastActorName = msg.Name;
+                break;
+            }
+            case Hi msg:
+            {
+                Console.WriteLine( $"Hi {lastActorName}!");
+            }
+        }
+        return Actor.Done;
     }
 }
 
@@ -77,8 +85,7 @@ public class Program
 {
     public static void Main()
     {
-        var mySystem = ActorSystem.Create("MySystem");
-        var myActor = mySystem.ActorOf(Props.Create<MyActor>());
+        var myActor = Actor.Spawn(Props.FromProducer(() => new MyActor));
         myActor.Tell(new MyMessage("AkkaDotNetUser"));
         myActor.Tell(new Hi());
     }

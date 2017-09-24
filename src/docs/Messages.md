@@ -68,14 +68,11 @@ public class MyActor : IActor
         switch(context.Message)
         {
             case MyMessage msg:
-            {
                 lastActorName = msg.Name;
                 break;
-            }
-            case Hi msg:
-            {
+            case Hi _:
                 Console.WriteLine( $"Hi {lastActorName}!");
-            }
+                break,
         }
         return Actor.Done;
     }

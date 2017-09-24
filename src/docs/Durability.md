@@ -35,7 +35,7 @@ As a supplementary part we give a few pointers at how to build stronger
 reliability on top of the built-in ones. The chapter closes by discussing the
 role of the “Dead Letter Office”.
 
-##The General Rules
+## The General Rules
 
 These are the rules for message sends (i.e. the `Tell`  method, which
 also underlies the `Request` pattern):
@@ -90,8 +90,8 @@ comply; think for example about configurable mailbox types and how a bounded
 mailbox would interact with the third point, or even what it would mean to
 decide upon the “successfully” part of point five.
 
-Along those same lines goes the reasoning in `Nobody Needs Reliable
-Messaging`_. The only meaningful way for a sender to know whether an
+Along those same lines goes the reasoning in [Nobody Needs Reliable
+Messaging](https://medium.com/@kellerapps/nobody-needs-reliable-messaging-7012ab5c5b18). The only meaningful way for a sender to know whether an
 interaction was successful is by receiving a business-level acknowledgement
 message, which is not something Proto.Actor could make up on its own (neither are we
 writing a “do what I mean” framework nor would you want us to).
@@ -100,8 +100,7 @@ Proto.Actor embraces distributed computing and makes the fallibility of communic
 explicit through message passing, therefore it does not try to lie and emulate
 a leaky abstraction. This is a model that has been used with great success in
 Erlang and requires the users to design their applications around it. You can
-read more about this approach in the `Erlang documentation`_ (section 10.9 and
-10.10), Proto.Actor follows it closely.
+read more about this approach in the [Erlang documentation](http://erlang.org/faq/academic.html#idp32880720), Proto.Actor follows it closely.
 
 Another angle on this issue is that by providing only basic guarantees those
 use cases which do not need stronger reliability do not pay the cost of their
@@ -129,10 +128,7 @@ illustrated in the following:
 
 >**Note**<br/>
 It is important to note that Proto.Actor's guarantee applies to the order in which
-messages are enqueued into the recipient's mailbox. If the mailbox
-implementation does not respect FIFO order (e.g. a `PriorityMailbox`),
-then the order of processing by the actor can deviate from the enqueueing
-order.
+messages are enqueued into the recipient's mailbox. 
 
 Please note that this rule is **not transitive**:
 
@@ -185,7 +181,7 @@ patterns local to some actors) in order to be fit for running on a cluster of
 machines. Our credo is “design once, deploy any way you wish”, and to achieve
 this you should only rely on The [General Rules]().
 
-###Reliability of Local Message Sends
+### Reliability of Local Message Sends
 
 The Proto.Actor test suite relies on not losing messages in the local context (and for
 non-error condition tests also for remote deployment), meaning that we
@@ -209,7 +205,7 @@ exception while processing, that notification goes to the supervisor instead.
 This is in general not distinguishable from a lost message for an outside
 observer.
 
-###Ordering of Local Message Sends
+### Ordering of Local Message Sends
 
 Assuming strict FIFO mailboxes the abovementioned caveat of non-transitivity of
 the message ordering guarantee is eliminated under certain conditions. As you
@@ -234,7 +230,7 @@ possibly non-exhaustive list of counter-indications is:
 This list has been compiled carefully, but other problematic scenarios may have
 escaped our analysis.
 
-###How does Local Ordering relate to Network Ordering
+### How does Local Ordering relate to Network Ordering
 
 As explained in the previous paragraph local message sends obey transitive causal ordering under certain conditions. If the remote message transport would respect this ordering as well, that would translate to transitive causal ordering across one network link, i.e. if exactly two network hosts are involved. Involving multiple links, e.g. the three actors on three different nodes mentioned above, then no guarantees can be made.
 
@@ -242,13 +238,13 @@ The current remote transport does **not** support this (again this is caused by 
 
 As a speculative view into the future it might be possible to support this ordering guarantee by re-implementing the remote transport layer based completely on actors; at the same time we are looking into providing other low-level transport protocols like UDP or SCTP which would enable higher throughput or lower latency by removing this guarantee again, which would mean that choosing between different implementations would allow trading guarantees versus performance.
 
-##Higher-level abstractions
+## Higher-level abstractions
 
 
 Based on a small and consistent tool set in ProtoActor's core, Proto.Actor also provides
 powerful, higher-level abstractions on top it.
 
-###Messaging Patterns
+### Messaging Patterns
 
 As discussed above a straight-forward answer to the requirement of reliable
 delivery is an explicit ACK–RETRY protocol. In its simplest form this requires
@@ -268,7 +264,7 @@ idempotent on the level of the business logic.
 Another example of implementing all three requirements is shown at
 :ref:`reliable-proxy` (which is now superseded by [[At least once delivery]]).
 
-###Event Sourcing
+### Event Sourcing
 
 Event sourcing (and sharding) is what makes large websites scale to
 billions of users, and the idea is quite simple: when a component (think actor)
@@ -296,7 +292,7 @@ do apply.
 
 An example implementation of this pattern is shown at :ref:`mailbox-acking`.
 
-##Dead Letters
+## Dead Letters
 
 Messages which cannot be delivered (and for which this can be ascertained) will
 be delivered to a synthetic actor called `/deadLetters`. This delivery
@@ -304,7 +300,7 @@ happens on a best-effort basis; it may fail even within a single application in 
 during actor termination). Messages sent via unreliable network transports will
 be lost without turning up as dead letters.
 
-###What Should I Use Dead Letters For?
+### What Should I Use Dead Letters For?
 
 The main use of this facility is for debugging, especially if an actor send
 does not arrive consistently (where usually inspecting the dead letters will

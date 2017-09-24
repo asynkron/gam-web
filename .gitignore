@@ -5,3 +5,4 @@ web/*
 src/wiki/*
 akka.net
 .sass-cache/
+package-lock.json

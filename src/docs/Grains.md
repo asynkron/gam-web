@@ -95,3 +95,26 @@ This can be prevented by persisting state in a database with some form of CAS op
 
 In case the two instances change any state, this can now be detected by CAS changes.
 
+## FAQ
+
+### Communicate with Virtual Actors
+
+In order to send messages to a virtual actor, you need to get hold of the `PID`.
+
+You do this using the `Cluster.GetAsync("name","kind")` in C#, and `cluster.Get("name","kind")` in Go.
+
+This gives you the PID, *and* a status.
+e.g. the status could tell you that the specific Kind you requested are not yet available, possibly due to no such node having joined the cluster yet.
+
+This allows you to re-try getting the PID by calling the Cluster.Get untill it succeeds.
+
+It is also important to understand that the PID should be treated as a transient resource in this case, do not store it or pass it around.
+The PID only points to the current activation of the actor, and can very well change over time.
+
+The idiomatic way is to always call Cluster.Get whenever you want to reach a virtual actor.
+
+### Generate Typed Virtual Actors
+
+//TODO
+
+Show examples how to codegen grains

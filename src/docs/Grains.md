@@ -25,7 +25,7 @@ Instead, we leverage proven technologies such as Consul.
 
 This means that Consul manages the cluster formation:
 
-![Consul Cluster](images/ConsulCluster.png)
+![Consul Cluster](images/ConsulCluster.png 'caption|width=50%')
 
 ## Proto Cluster
 

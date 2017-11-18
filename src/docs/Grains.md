@@ -5,6 +5,8 @@ title: Proto.Cluster
 
 # Proto.Cluster
 
+## Virtual Actors
+
 Proto.Cluster leverages the "Vritual Actor Model", which was pioneered by Microsoft Orleans.
 Unlike the traditional Actor Model used in Erlang or Akka, where developers must care about actor lifecycles, placement and failures.
 The virtual actor model instead focus on ease of use, high availability where most of the complexity have been abstracted away from the developer.
@@ -19,11 +21,19 @@ This offers us a unique way to optimize for data locality, while still offering 
 Just like everything else in Proto.Actor where we have re-used proven technologies such as Protobuf and gRPC, we do the same for clustering, we do not reinvent the wheel and create our own cluster mechanics.
 Instead, we leverage proven technologies such as Consul.
 
+## Consul Cluster
+
 This means that Consul manages the cluster formation:
+
 ![Consul Cluster](images/ConsulCluster.png)
 
+## Proto Cluster
+
 On top of this, we attach the Proto.Actor members:
+
 ![Proto Cluster](images/ProtoCluster.png)
+
+## Name to Member affinity
 
 Each member gets a hash-code, this hash-code is based on host + port + unique id of the member.
 
@@ -38,12 +48,16 @@ By matching the hash-code against the hash ring, we can see that the member clos
 
 ![Name Owner](images/NameOwner.png)
 
+## Actor Activations
+
 What is important to understand here is that the member "E" in this case, do not own the **actor**, just the **name** "Roger".
 
 The Actor itself is then spawned or "activated" somewhere in the cluster.
 This might seem strange at first, why do we need this two step structure for locating actors?
 
 ![Actor Placement](images/ActorPlacement.png)
+
+## Dealing with Topology Changes
 
 The reason for this is to deal with topology changes.
 In the case members join or leave the cluster, the topology change, and the shape of the hash ring is altered slightly.

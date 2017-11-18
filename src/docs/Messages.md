@@ -4,6 +4,7 @@ title: Messages
 ---
 
 # Messages
+
 One of the most fundamental concepts to the Actor model is the notion of ["message-driven systems," as defined by the Reactive Manifesto](http://www.reactivemanifesto.org/glossary#Message-Driven "Reactive Manifesto"):
 
 > A message is an item of data that is sent to a specific destination. An event is a signal emitted by a component upon reaching a given state. In a message-driven system addressable recipients await the arrival of messages and react to them, otherwise lying dormant.
@@ -14,6 +15,7 @@ One of the most fundamental concepts to the Actor model is the notion of ["messa
 In Proto.Actor messages are simple POCO classes:
 
 #### `C#`
+
 ```csharp
 public class MyMessage
 {
@@ -27,6 +29,7 @@ public class MyMessage
 ```
 
 #### `Go`
+
 ```go
 type MyMessage struct {
     Name string
@@ -36,6 +39,7 @@ type MyMessage struct {
 Proto.Actor allows you to automatically pass around these messages to any actor, whether it's an actor running inside your application's local process or a remote actor running on a different machine. Proto.Actor can automatically serialize and route your message to its intended recipient(s.)
 
 ## Actors change their internal state based on the content of messages
+
 One of the defining characteristics of actors is that they have the ability to change their state in a thread-safe way, and they do this based on the content of messages they receive.
 
 Here's a simple example:
@@ -117,5 +121,6 @@ Since all "function calls" have been replaced by messages, i.e. distinct instanc
 Imagine how easy it would be to build something like the Undo button in Microsoft Word with an actor - by default you have a message that represents every change someone made to a document. To undo one of those changes, you just have to pop the message off of the UndoActor's stash of messages and push that change back to another actor who manages the current state of the Word document. This is a pretty powerful concept in practice.
 
 ### References
+
 * **[*Reactive Manifesto*: Glossary - Message-driven](http://www.reactivemanifesto.org/glossary#Message-Driven)**
 * **[*Wikipedia*: "Immutable object"](http://en.wikipedia.org/wiki/Immutable_object)**

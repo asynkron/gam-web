@@ -1,3 +1,8 @@
+---
+layout: docs.hbs
+title: Proto.Cluster
+---
+
 # Proto.Cluster
 
 Proto.Cluster leverages the "Vritual Actor Model", which was pioneered by Microsoft Orleans.

@@ -118,3 +118,11 @@ The idiomatic way is to always call Cluster.Get whenever you want to reach a vir
 //TODO
 
 Show examples how to codegen grains
+
+## Hybrid Clusters: C#, Go and Kotlin
+
+//TODO
+
+## Technical Details
+
+//TODO Hashing algorithm

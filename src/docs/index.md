@@ -10,6 +10,7 @@ title: Proto.Actor Documentation
 - [What is Proto.Actor?](What is ProtoActor)
 - [Why Proto.Actor?](Why ProtoActor)
 - [Design Principles](Design Principles)
+- [Features](Features)
 
 ## Proto.Actor Concepts
 
@@ -24,6 +25,14 @@ title: Proto.Actor Documentation
 
 - [Go](golang/index)
 - [C#/.NET](dotnet/index)
+
+## Modules
+
+- [Actor](Actors)
+- [Remote](Remote)
+- [Cluster](Grains)
+- [Router](Routers)
+- [SimpleScheduler](Scheduling)
 
 ## Additional Information
 

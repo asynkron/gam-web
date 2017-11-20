@@ -1,0 +1,24 @@
+---
+layout: docs.hbs
+title: Scheduling Meessages
+---
+
+# Scheduling Future messages
+
+
+In C#, we provide the `SimpleScheduler` implementation of the `ISimpleScheduler`interface.
+This allows you to do operations such as `ScheduleTellOnce` and `ScheduleRequestOnce`
+
+```csharp
+ISimpleScheduler scheduler = new SimpleScheduler();
+var pid = context.Spawn(Actor.FromProducer(() => new ScheduleGreetActor()));
+                    
+scheduler
+    .ScheduleTellOnce(TimeSpan.FromMilliseconds(100), context.Self, new SimpleMessage("test 1"))
+    .ScheduleTellOnce(TimeSpan.FromMilliseconds(200), context.Self, new SimpleMessage("test 2"))
+    .ScheduleTellOnce(TimeSpan.FromMilliseconds(300), context.Self, new SimpleMessage("test 3"))
+    .ScheduleTellOnce(TimeSpan.FromMilliseconds(400), context.Self, new SimpleMessage("test 4"))
+    .ScheduleTellOnce(TimeSpan.FromMilliseconds(500), context.Self, new SimpleMessage("test 5"))
+    .ScheduleRequestOnce(TimeSpan.FromSeconds(1), context.Self, pid, new Greet("Daniel"))
+    .ScheduleTellOnce(TimeSpan.FromSeconds(5), context.Self, new Hello());
+```

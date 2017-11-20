@@ -5,7 +5,6 @@ title: Scheduling Meessages
 
 # Scheduling Future messages
 
-
 In C#, we provide the `SimpleScheduler` implementation of the `ISimpleScheduler`interface.
 This allows you to do operations such as `ScheduleTellOnce` and `ScheduleRequestOnce`
 
@@ -22,3 +21,15 @@ scheduler
     .ScheduleRequestOnce(TimeSpan.FromSeconds(1), context.Self, pid, new Greet("Daniel"))
     .ScheduleTellOnce(TimeSpan.FromSeconds(5), context.Self, new Hello());
 ```
+
+Another option if you want to perform some form of action after a given period of time is:
+
+```csharp
+context.AwaitTask(Task.Delay(1000), t => {
+     //do stuff after 1000ms w/o blocking the actor while waiting
+});
+```
+
+This will asynchronously wait for the task to complete, then send a message back to the actor itself, containing the 
+block of code to execute within the actors concurrency constraint.
+

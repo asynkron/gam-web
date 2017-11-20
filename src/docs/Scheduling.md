@@ -6,7 +6,7 @@ title: Scheduling Meessages
 # Scheduling Messages
 
 In C#, we provide the `SimpleScheduler` implementation of the `ISimpleScheduler`interface.
-This allows you to do operations such as `ScheduleTellOnce` and `ScheduleRequestOnce`
+This allows you to do operations such as `ScheduleTellOnce`, `ScheduleRequestOnce` and `ScheduleTellRepeatedly`
 
 ```csharp
 ISimpleScheduler scheduler = new SimpleScheduler();
@@ -19,7 +19,8 @@ scheduler
     .ScheduleTellOnce(TimeSpan.FromMilliseconds(400), context.Self, new SimpleMessage("test 4"))
     .ScheduleTellOnce(TimeSpan.FromMilliseconds(500), context.Self, new SimpleMessage("test 5"))
     .ScheduleRequestOnce(TimeSpan.FromSeconds(1), context.Self, pid, new Greet("Daniel"))
-    .ScheduleTellOnce(TimeSpan.FromSeconds(5), context.Self, new Hello());
+    .ScheduleTellOnce(TimeSpan.FromSeconds(5), context.Self, new Hello())
+    .ScheduleTellRepeatedly(TimeSpan.FromSeconds(3), TimeSpan.FromMilliseconds(500), context.Self, new HickUp(), out timer);
 ```
 
 Another option if you want to perform some form of action after a given period of time is:

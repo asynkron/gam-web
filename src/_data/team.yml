@@ -51,3 +51,12 @@ tomliversidge:
   profile_image: https://avatars3.githubusercontent.com/u/1437372?v=3&s=400
   description: Core developer of the Proto.Actor .NET API.
   platforms: dotnet
+  
+potterdai:
+  name: Potter Dai
+  title: Developer
+  twitter:
+  github: https://github.com/potterdai
+  profile_image: https://avatars3.githubusercontent.com/u/3758951?v=3&s=400
+  description: Core developer of the Proto.Actor .NET API, Go API
+  platforms: dotnet go
